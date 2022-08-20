@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Cadastro">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="134dp"
+                android:layout_height="123dp"
+                android:src="@drawable/logo" />
+
+
+            <TextView
+                style="@style/BoldHeadlines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cadastro"
+                android:textColor="@color/black"
+                android:textSize="50dp"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            style="@style/BoldHeadlines"
+            android:text="Dados Pessoais"
+            android:textSize="25dp"
+            android:textColor="@color/green"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            style="@style/BoldHeadlines"
+            android:layout_marginLeft="35dp"
+            android:text="Nome:"
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
+
+
+        <EditText
+            android:id="@+id/edNome"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:hint="Digite aqui..."
+            android:textColorHint="@color/black"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            style="@style/BoldHeadlines"
+            android:layout_marginTop="2dp"
+            android:text="WhatsApp:"
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/edWhatsapp"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:hint="Digite aqui..."
+            android:textColorHint="@color/black"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/BoldHeadlines"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="2dp"
+            android:text="CPF:"
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/cpf"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:hint="Digite aqui..."
+            android:imeActionLabel="usuario"
+            android:textColorHint="@color/black"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            style="@style/BoldHeadlines"
+            android:layout_margin="4dp"
+            android:text="Dados de Login"
+            android:textSize="25dp"
+            android:textColor="@color/green"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            style="@style/BoldHeadlines"
+            android:layout_marginTop="1dp"
+            android:text="Usuário"
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/edUsuario"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:hint="Digite aqui..."
+            android:imeActionLabel="usuario"
+            android:textColorHint="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            style="@style/BoldHeadlines"
+            android:layout_marginTop="13dp"
+            android:text="Usuário"
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/edSenha"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:hint="Digite aqui..."
+            android:textColorHint="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <Button
+                android:id="@+id/btSalvar"
+                android:layout_width="160dp"
+                style="@style/BoldHeadlines"
+                android:layout_height="60dp"
+                android:layout_marginRight="15dp"
+                android:textSize="15dp"
+                android:text="Salvar"
+                tools:layout_editor_absoluteX="54dp"
+                tools:layout_editor_absoluteY="550dp"
+                android:backgroundTint="@color/green"
+                android:textColor="@color/black"/>
+
+            <Button
+                android:id="@+id/btVoltar"
+                android:textSize="15dp"
+                style="@style/BoldHeadlines"
+                android:layout_width="160dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/white"
+                android:text="Voltar"
+                android:textColor="@color/black"
+                android:onClick="btVoltarOnClick"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textStyle="italic"
+        android:layout_marginBottom="10dp"
+        android:text="₢ Seus dados serão protegidos de acordo com a LGPD"
+        android:textSize="15dp"
+        android:textColor="@color/black"/>
+
+</LinearLayout>

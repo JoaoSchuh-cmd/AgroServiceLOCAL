@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:src="@drawable/logo" />
+
+    <EditText
+        android:id="@+id/edUsername"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:hint="Usuario"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/edPassword"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:hint="Senha"
+        android:textColor="@color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btEntrar"
+            android:layout_width="160dp"
+            style="@style/BoldHeadlines"
+            android:layout_height="60dp"
+            android:textSize="15dp"
+            android:text="Entrar"
+            tools:ignore="MissingConstraints"
+            android:backgroundTint="@color/green"
+            android:textColor="@color/black"
+            android:layout_marginRight="15dp"
+            android:onClick="btEntrarOnClick"/>
+
+        <Button
+            android:id="@+id/btCadastrar"
+            android:layout_width="160dp"
+            style="@style/BoldHeadlines"
+            android:layout_height="60dp"
+            android:textSize="15dp"
+            android:backgroundTint="@color/white"
+            android:text="Cadastre-se"
+            android:textColor="@color/black"
+            android:onClick="btCadastrarOnClick"/>
+    </LinearLayout>
+
+</LinearLayout>
