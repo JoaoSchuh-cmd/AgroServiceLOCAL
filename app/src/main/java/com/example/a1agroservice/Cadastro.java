@@ -20,6 +20,7 @@ public class Cadastro extends AppCompatActivity {
     }
 
     public void btVoltarOnClick(View view) {
+        System.out.println("matheus pintudao");
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }
