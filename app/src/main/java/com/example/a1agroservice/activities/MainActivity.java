@@ -1,10 +1,13 @@
-package com.example.a1agroservice;
+package com.example.a1agroservice.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.a1agroservice.R;
+import com.example.a1agroservice.activities.CadastroActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btCadastrarOnClick(View view) {
-        Intent intent = new Intent(getApplicationContext(), Cadastro.class);
+        Intent intent = new Intent(getApplicationContext(), CadastroActivity.class);
         startActivity(intent);
     }
 
