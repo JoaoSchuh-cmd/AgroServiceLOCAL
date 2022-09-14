@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 public class Pessoa {
 
     private int id;
-
     private String nome;
     private String cpf;
     private String usuario;
@@ -71,7 +70,5 @@ public class Pessoa {
     public void setCelular(String celular) {
         this.celular = celular;
     }
-
-
 
 }

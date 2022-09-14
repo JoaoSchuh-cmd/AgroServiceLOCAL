@@ -27,4 +27,5 @@ public interface PessoaService {
 
     @DELETE("pessoa/{id}")
     Call<Pessoa> deletePessoa(@Path("id") int id);
+
 }
