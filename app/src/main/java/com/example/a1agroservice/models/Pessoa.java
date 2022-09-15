@@ -1,7 +1,5 @@
 package com.example.a1agroservice.models;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Pessoa {
 
     private int id;
@@ -71,4 +69,15 @@ public class Pessoa {
         this.celular = celular;
     }
 
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", usuario='" + usuario + '\'' +
+                ", senha='" + senha + '\'' +
+                ", celular='" + celular + '\'' +
+                '}';
+    }
 }
