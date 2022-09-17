@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.a1agroservice.R;
 import com.example.a1agroservice.controllers.PessoaController;
 import com.example.a1agroservice.models.Pessoa;
+import com.example.a1agroservice.singleton.Login;
 
 public class CadastroActivity extends AppCompatActivity {
     private EditText edNome;
@@ -19,7 +20,7 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText edCpf;
     private EditText edUsuario;
     private EditText edSenha;
-    private PessoaController pcontroller;
+    private PessoaController pessoaController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +28,11 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         iniciaComponentes();
-        pcontroller = new PessoaController();
+        pessoaController = new PessoaController();
     }
 
     public void btVoltarOnClick(View view) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
+        abrirLoginPage();
     }
 
     public void btSalvarOnCick(View view) {
@@ -41,14 +41,34 @@ public class CadastroActivity extends AppCompatActivity {
                         PessoaController.getInstance().retornaProximoId(),
                         edNome.getText().toString(),
                         edCpf.getText().toString(),
-                        edWhatsapp.getText().toString(),
                         edUsuario.getText().toString(),
-                        edSenha.getText().toString()
+                        edSenha.getText().toString(),
+                        edWhatsapp.getText().toString()
                 );
-        if (pcontroller.insert(pessoa) != null)
-            Toast.makeText(this, "Cadastro efetuado!", Toast.LENGTH_SHORT).show();
-        else Log.e("CadastroActivity", "Erro ao efetuar cadastro!");
+
+        pessoaController.insert(this, pessoa);
+
+        if (pessoaController.getByUsuario(edUsuario.getText().toString()) != null) {
+            limpaCampos(); // TODO Quando tiver a HomePage, pode excluir isso
+//            abrirHomePage();
+        } else {
+            limpaCampos();
+            abrirLoginPage();
+        };
     }
+
+    public void abrirLoginPage() {
+        Login.getUsuarioLogado(edUsuario.getText().toString(), edSenha.getText().toString());
+
+        Intent loginPage = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(loginPage);
+    }
+
+    public void abrirHomePage() {
+//        Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
+//        startActivity(homePage);
+    }
+
     //TODO Acho q não vai precisar desse pq já fiz as validações na API mas tem q ver como trabalhar com as respostas dela;
 //    private void validaCamposVazios() {
 //        if (edNome.getText().toString().isEmpty()) {
@@ -64,4 +84,11 @@ public class CadastroActivity extends AppCompatActivity {
         edSenha = findViewById(R.id.edSenha);
     }
 
+    private void limpaCampos() {
+        edNome.setText("");
+        edWhatsapp.setText("");
+        edCpf.setText("");
+        edUsuario.setText("");
+        edSenha.setText("");
+    }
 }

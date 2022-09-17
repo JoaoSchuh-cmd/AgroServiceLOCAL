@@ -2,6 +2,8 @@ package com.example.a1agroservice.service;
 
 import com.example.a1agroservice.models.Pessoa;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -11,13 +13,15 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface PessoaService {
-    public static final String BASE_URL = "http://192.168.1.11:27017";
 
     @GET("pessoa")
     Call<Pessoa> getPessoas();
 
-    @GET("pessoa/{id}")
+    @GET("pessoa/id={id}")
     Call<Pessoa> getPessoa(@Path("id") int id);
+
+    @GET("pessoa/usuario={usuario}")
+    Call<Pessoa> getPessoa(@Path("usuario") String nome);
 
     @POST("pessoa")
     Call<Pessoa> postPessoa(@Body Pessoa pessoa);
