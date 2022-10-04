@@ -1,6 +1,9 @@
 package com.example.a1agroservice.models;
 
-public class Pessoa {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Pessoa implements Parcelable {
 
     private int id;
     private String nome;
@@ -80,4 +83,41 @@ public class Pessoa {
                 ", celular='" + celular + '\'' +
                 '}';
     }
+
+//  {  PARCEABLE }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(nome);
+        dest.writeString(cpf);
+        dest.writeString(usuario);
+        dest.writeString(senha);
+        dest.writeString(celular);
+    }
+
+    protected Pessoa(Parcel in) {
+        id = in.readInt();
+        nome = in.readString();
+        cpf = in.readString();
+        usuario = in.readString();
+        senha = in.readString();
+        celular = in.readString();
+    }
+
+    public static final Creator<Pessoa> CREATOR = new Creator<Pessoa>() {
+        @Override
+        public Pessoa createFromParcel(Parcel in) {
+            return new Pessoa(in);
+        }
+
+        @Override
+        public Pessoa[] newArray(int size) {
+            return new Pessoa[size];
+        }
+    };
 }

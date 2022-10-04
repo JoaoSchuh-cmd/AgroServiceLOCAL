@@ -36,15 +36,13 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public void btSalvarOnCick(View view) {
-        Pessoa pessoa =
-                new Pessoa(
-                        PessoaController.getInstance().retornaProximoId(),
-                        edNome.getText().toString(),
-                        edCpf.getText().toString(),
-                        edUsuario.getText().toString(),
-                        edSenha.getText().toString(),
-                        edWhatsapp.getText().toString()
-                );
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId(PessoaController.getInstance().retornaProximoId());
+        pessoa.setNome(edNome.getText().toString());
+        pessoa.setCpf(edCpf.getText().toString());
+        pessoa.setUsuario(edUsuario.getText().toString());
+        pessoa.setSenha(edSenha.getText().toString());
+        pessoa.setCelular(edWhatsapp.getText().toString());
 
         pessoaController.insert(this, pessoa);
 

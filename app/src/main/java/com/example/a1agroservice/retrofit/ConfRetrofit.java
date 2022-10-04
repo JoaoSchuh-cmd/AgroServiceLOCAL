@@ -1,6 +1,5 @@
 package com.example.a1agroservice.retrofit;
 
-import com.example.a1agroservice.models.Pessoa;
 import com.example.a1agroservice.service.PessoaService;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

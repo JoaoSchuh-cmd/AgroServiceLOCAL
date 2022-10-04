@@ -7,15 +7,20 @@ import android.widget.Toast;
 import com.example.a1agroservice.models.Pessoa;
 import com.example.a1agroservice.service.PessoaService;
 
+import java.util.ArrayList;
+
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PessoaController extends GenericController<Pessoa> {
+    private Context contexto;
     private static PessoaController pessoaController;
     private PessoaService service;
 
     private Pessoa pessoa;
+    ArrayList<Pessoa> pessoas = new ArrayList();
 
     public PessoaController() {
         configInicial();
@@ -26,22 +31,18 @@ public class PessoaController extends GenericController<Pessoa> {
     }
 
     public int retornaProximoId() {
-        int proximoId = 0;
-        int idAnterior = 0;
-
-
-        service.getPessoas().enqueue(new Callback<Pessoa>() {
+        service.getPessoas().enqueue(new Callback<ArrayList<Pessoa>>() {
             @Override
-            public void onResponse(Call<Pessoa> call, Response<Pessoa> response) {
-                pessoa = response.body();
+            public void onResponse(Call<ArrayList<Pessoa>> call, Response<ArrayList<Pessoa>> response) {
+                pessoas = response.body();
             }
 
             @Override
-            public void onFailure(Call<Pessoa> call, Throwable t) {
+            public void onFailure(Call<ArrayList<Pessoa>> call, Throwable t) {
 
             }
         });
-        return  + 1;
+        return pessoas.get(pessoas.size() - 1).getId() + 1;
     }
 
     public boolean validaSenha(String usuario, String senhaInformada) {
@@ -64,6 +65,7 @@ public class PessoaController extends GenericController<Pessoa> {
     @Override
     public void configInicial() {
         pessoa = new Pessoa();
+        pessoas = new ArrayList();
         service = retrofit.getPessoaService();
     }
 
@@ -73,10 +75,13 @@ public class PessoaController extends GenericController<Pessoa> {
             public void onResponse(Call<Pessoa> call, Response<Pessoa> response) {
                 if (response.isSuccessful())
                     pessoa = response.body();
-                else Log.e("FromJson ", "Erro ao salvar body: " + response.errorBody());
+                else {
+                    pessoa = null;
+                    Log.e("FromJson ", "Erro ao salvar body: " + response.message());
+                }
             }
             @Override
-            public void onFailure(Call<Pessoa> call, Throwable t) {
+            public void onFailure(Call<Pessoa> call, Throwable t)  {
                 Log.e("PessoaService  ", "Erro ao buscar pessoa: " + t.getMessage());
             }
         });
@@ -89,8 +94,24 @@ public class PessoaController extends GenericController<Pessoa> {
     }
 
     @Override
-    public Call<Pessoa> getAll() {
-        return service.getPessoas();
+    public ArrayList<Pessoa> getAll() {
+
+        service.getPessoas().enqueue(new Callback<ArrayList<Pessoa>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Pessoa>> call, Response<ArrayList<Pessoa>> response) {
+                if (response.isSuccessful())
+                    pessoas = response.body();
+                else {
+                    pessoas = null;
+                    Log.e("FromJson ", "Erro ao salvar body: " + response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<ArrayList<Pessoa>> call, Throwable t)  {
+                Log.e("PessoaService  ", "Erro ao buscar pessoa: " + t.getMessage());
+            }
+        });
+        return null;
     }
 
     @Override
