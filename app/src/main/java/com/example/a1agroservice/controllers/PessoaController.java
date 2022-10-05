@@ -56,7 +56,7 @@ public class PessoaController extends GenericController<Pessoa> {
 
             @Override
             public void onFailure(Call<Pessoa> call, Throwable t) {
-                Log.e("PessoaService  ", "Erro ao buscar pessoa pelo nome: " + t.getMessage());
+                Log.e("PessoaService  ", "Erro ao buscar pessoa pelo username: " + t.getMessage());
             }
         });
         return pessoa.getSenha() == senhaInformada;
@@ -76,7 +76,6 @@ public class PessoaController extends GenericController<Pessoa> {
                 if (response.isSuccessful())
                     pessoa = response.body();
                 else {
-                    pessoa = null;
                     Log.e("FromJson ", "Erro ao salvar body: " + response.message());
                 }
             }

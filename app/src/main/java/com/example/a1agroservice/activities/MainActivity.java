@@ -32,23 +32,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btEntrarOnClick(View view) throws InterruptedException {
+
         if (edUsuario.getText().toString().isEmpty()) {
             Toast.makeText(this, "Informe um usuário!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (pessoaController.getByUsuario(edUsuario.getText().toString().trim()) == null) {
-            Toast.makeText(this, "Usuário não encontrado!", Toast.LENGTH_SHORT).show();
-            return;
-        }
+
         if (edSenha.getText().toString().isEmpty()) {
             Toast.makeText(this, "Informe a senha!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (pessoaController.validaSenha(edUsuario.getText().toString(), edSenha.getText().toString())) {
-            Toast.makeText(this, "Senha incorreta!", Toast.LENGTH_SHORT).show();
-            return;
+
+        try {
+            if (pessoaController.getByUsuario(edUsuario.getText().toString().trim()) != null)
+                if (pessoaController.validaSenha(edUsuario.getText().toString(), edSenha.getText().toString())) {
+                    Toast.makeText(this, "Senha incorreta!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    Toast.makeText(this, "Bem-Vindo " + pessoaController.getByUsuario(edUsuario.getText().toString()).getNome(), Toast.LENGTH_SHORT).show();
+                }
+        } catch (Exception E) {
+            Toast.makeText(this, "Usuário não encontrado!", Toast.LENGTH_SHORT).show();
         }
-        Toast.makeText(this, "Bem-Vindo " + pessoaController.getByUsuario(edUsuario.getText().toString()).getNome(), Toast.LENGTH_SHORT).show();
 
         //TODO abrir Home Page
 //        Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
