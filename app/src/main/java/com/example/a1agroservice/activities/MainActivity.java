@@ -49,10 +49,12 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, "Senha incorreta!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    Toast.makeText(this, "Bem-Vindo " + pessoaController.getByUsuario(edUsuario.getText().toString()).getNome(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Bem-Vindo " + pessoaController.getByUsuario(edUsuario.getText().toString()).getNome(), Toast.LENGTH_SHORT).show();
+//                    else
+//                        Toast.makeText(this, "Usuário não encontrado!", Toast.LENGTH_SHORT).show();
                 }
         } catch (Exception E) {
-            Toast.makeText(this, "Usuário não encontrado!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Falha na consulta!", Toast.LENGTH_SHORT).show();
         }
 
         //TODO abrir Home Page

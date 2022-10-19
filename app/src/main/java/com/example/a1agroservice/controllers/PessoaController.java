@@ -34,7 +34,11 @@ public class PessoaController extends GenericController<Pessoa> {
         service.getPessoas().enqueue(new Callback<ArrayList<Pessoa>>() {
             @Override
             public void onResponse(Call<ArrayList<Pessoa>> call, Response<ArrayList<Pessoa>> response) {
-                pessoas = response.body();
+                if (response.code() == 200)
+                    pessoas = response.body();
+                else {
+                    pessoas = null;
+                }
             }
 
             @Override
@@ -42,7 +46,7 @@ public class PessoaController extends GenericController<Pessoa> {
 
             }
         });
-        return pessoas.get(pessoas.size() - 1).getId() + 1;
+        return pessoas.size() != 0 ? pessoas.get(pessoas.size() - 1).getId() + 1 : 1;
     }
 
     public boolean validaSenha(String usuario, String senhaInformada) {
@@ -70,12 +74,31 @@ public class PessoaController extends GenericController<Pessoa> {
     }
 
     public Pessoa getByUsuario(String usuario) {
-        service.getPessoa(usuario).enqueue(new Callback<Pessoa>() {
+
+        Call<Pessoa>call = service.getPessoa(usuario);
+        call.enqueue(new Callback<Pessoa>() {
             @Override
             public void onResponse(Call<Pessoa> call, Response<Pessoa> response) {
-                if (response.isSuccessful())
+                if (response.code() == 200)
                     pessoa = response.body();
                 else {
+                    pessoa = null;
+                    Log.e("FromJson ", "Erro ao salvar body: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Pessoa> call, Throwable t) {
+                Log.e("PessoaService  ", "Erro ao buscar pessoa: " + t.getMessage());
+            }
+        });
+        /*service.getPessoa(usuario).enqueue(new Callback<Pessoa>() {
+            @Override
+            public void onResponse(Call<Pessoa> call, Response<Pessoa> response) {
+                if (response.code() == 200)
+                    pessoa = response.body();
+                else {
+                    pessoa = null;
                     Log.e("FromJson ", "Erro ao salvar body: " + response.message());
                 }
             }
@@ -83,7 +106,7 @@ public class PessoaController extends GenericController<Pessoa> {
             public void onFailure(Call<Pessoa> call, Throwable t)  {
                 Log.e("PessoaService  ", "Erro ao buscar pessoa: " + t.getMessage());
             }
-        });
+        });*/
         return pessoa;
     }
 
@@ -98,7 +121,7 @@ public class PessoaController extends GenericController<Pessoa> {
         service.getPessoas().enqueue(new Callback<ArrayList<Pessoa>>() {
             @Override
             public void onResponse(Call<ArrayList<Pessoa>> call, Response<ArrayList<Pessoa>> response) {
-                if (response.isSuccessful())
+                if (response.code() == 200)
                     pessoas = response.body();
                 else {
                     pessoas = null;
@@ -110,7 +133,7 @@ public class PessoaController extends GenericController<Pessoa> {
                 Log.e("PessoaService  ", "Erro ao buscar pessoa: " + t.getMessage());
             }
         });
-        return null;
+        return pessoas;
     }
 
     @Override

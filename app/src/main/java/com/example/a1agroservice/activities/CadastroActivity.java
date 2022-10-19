@@ -46,13 +46,13 @@ public class CadastroActivity extends AppCompatActivity {
 
         pessoaController.insert(this, pessoa);
 
-        if (pessoaController.getByUsuario(edUsuario.getText().toString()) != null) {
-            limpaCampos(); // TODO Quando tiver a HomePage, pode excluir isso
-//            abrirHomePage();
-        } else {
+//        if (pessoaController.getByUsuario(edUsuario.getText().toString()) != null) {
+//            limpaCampos(); // TODO Quando tiver a HomePage, pode excluir isso
+////            abrirHomePage();
+//        } else {
             limpaCampos();
             abrirLoginPage();
-        };
+//        };
     }
 
     public void abrirLoginPage() {

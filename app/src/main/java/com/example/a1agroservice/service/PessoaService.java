@@ -20,7 +20,7 @@ public interface PessoaService {
     @GET("pessoa/id={id}")
     Call<Pessoa> getPessoa(@Path("id") int id);
 
-    @GET("pessoa/usuario={usuario}")
+    @GET("pessoa/username={usuario}")
     Call<Pessoa> getPessoa(@Path("usuario") String usuario);
 
     @POST("pessoa")
