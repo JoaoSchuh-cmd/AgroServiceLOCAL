@@ -28,7 +28,7 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         iniciaComponentes();
-        pessoaController = new PessoaController();
+        pessoaController = new PessoaController(this);
     }
 
     public void btVoltarOnClick(View view) {
@@ -37,7 +37,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     public void btSalvarOnCick(View view) {
         Pessoa pessoa = new Pessoa();
-        pessoa.setId(PessoaController.getInstance().retornaProximoId());
+        pessoa.setId(PessoaController.getInstance(this).retornaProximoId());
         pessoa.setNome(edNome.getText().toString());
         pessoa.setCpf(edCpf.getText().toString());
         pessoa.setUsuario(edUsuario.getText().toString());

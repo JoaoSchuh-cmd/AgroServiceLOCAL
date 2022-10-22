@@ -22,12 +22,13 @@ public class PessoaController extends GenericController<Pessoa> {
     private Pessoa pessoa;
     ArrayList<Pessoa> pessoas = new ArrayList();
 
-    public PessoaController() {
+    public PessoaController(Context context) {
+        this.contexto = context;
         configInicial();
     }
 
-    public static PessoaController getInstance() {
-        return pessoaController == null ? pessoaController = new PessoaController() : pessoaController;
+    public static PessoaController getInstance(Context context) {
+        return pessoaController == null ? pessoaController = new PessoaController(context) : pessoaController;
     }
 
     public int retornaProximoId() {
@@ -68,13 +69,13 @@ public class PessoaController extends GenericController<Pessoa> {
 
     @Override
     public void configInicial() {
-        pessoa = new Pessoa();
+        //pessoa = new Pessoa();
         pessoas = new ArrayList();
         service = retrofit.getPessoaService();
     }
 
     public Pessoa getByUsuario(String usuario) {
-
+        pessoa = null;
         Call<Pessoa>call = service.getPessoa(usuario);
         call.enqueue(new Callback<Pessoa>() {
             @Override
@@ -83,7 +84,7 @@ public class PessoaController extends GenericController<Pessoa> {
                     pessoa = response.body();
                 else {
                     pessoa = null;
-                    Log.e("FromJson ", "Erro ao salvar body: " + response.message());
+                    Toast.makeText(contexto, "Usuário não encontrado!", Toast.LENGTH_SHORT).show();
                 }
             }
 
