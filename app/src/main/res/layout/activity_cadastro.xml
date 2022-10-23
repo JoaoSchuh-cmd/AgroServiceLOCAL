@@ -79,7 +79,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Digite aqui..."
-            android:textColorHint="@color/black"/>
+            android:textColorHint="@color/black"
+            android:inputType="number"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -96,7 +97,8 @@
             android:layout_height="wrap_content"
             android:hint="Digite aqui..."
             android:imeActionLabel="usuario"
-            android:textColorHint="@color/black"/>
+            android:textColorHint="@color/black"
+            android:inputType="number"/>
 
         <TextView
             android:layout_width="match_parent"

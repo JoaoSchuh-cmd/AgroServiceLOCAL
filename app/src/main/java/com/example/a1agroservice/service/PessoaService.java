@@ -15,13 +15,13 @@ import retrofit2.http.Path;
 public interface PessoaService {
 
     @GET("pessoa")
-    Call<Pessoa> getPessoas();
+    Call<ArrayList<Pessoa>> getPessoas();
 
     @GET("pessoa/id={id}")
     Call<Pessoa> getPessoa(@Path("id") int id);
 
-    @GET("pessoa/usuario={usuario}")
-    Call<Pessoa> getPessoa(@Path("usuario") String nome);
+    @GET("pessoa/username={usuario}")
+    Call<Pessoa> getPessoa(@Path("usuario") String usuario);
 
     @POST("pessoa")
     Call<Pessoa> postPessoa(@Body Pessoa pessoa);

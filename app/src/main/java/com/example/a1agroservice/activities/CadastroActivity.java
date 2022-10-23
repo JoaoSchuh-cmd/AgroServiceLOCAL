@@ -28,7 +28,7 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         iniciaComponentes();
-        pessoaController = new PessoaController();
+        pessoaController = new PessoaController(this);
     }
 
     public void btVoltarOnClick(View view) {
@@ -36,25 +36,23 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public void btSalvarOnCick(View view) {
-        Pessoa pessoa =
-                new Pessoa(
-                        PessoaController.getInstance().retornaProximoId(),
-                        edNome.getText().toString(),
-                        edCpf.getText().toString(),
-                        edUsuario.getText().toString(),
-                        edSenha.getText().toString(),
-                        edWhatsapp.getText().toString()
-                );
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId(PessoaController.getInstance(this).retornaProximoId());
+        pessoa.setNome(edNome.getText().toString());
+        pessoa.setCpf(edCpf.getText().toString());
+        pessoa.setUsuario(edUsuario.getText().toString());
+        pessoa.setSenha(edSenha.getText().toString());
+        pessoa.setCelular(edWhatsapp.getText().toString());
 
         pessoaController.insert(this, pessoa);
 
-        if (pessoaController.getByUsuario(edUsuario.getText().toString()) != null) {
-            limpaCampos(); // TODO Quando tiver a HomePage, pode excluir isso
-//            abrirHomePage();
-        } else {
+//        if (pessoaController.getByUsuario(edUsuario.getText().toString()) != null) {
+//            limpaCampos(); // TODO Quando tiver a HomePage, pode excluir isso
+////            abrirHomePage();
+//        } else {
             limpaCampos();
             abrirLoginPage();
-        };
+//        };
     }
 
     public void abrirLoginPage() {

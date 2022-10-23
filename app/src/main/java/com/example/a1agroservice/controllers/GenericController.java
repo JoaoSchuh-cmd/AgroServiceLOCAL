@@ -5,6 +5,8 @@ import android.content.Context;
 import com.example.a1agroservice.models.Pessoa;
 import com.example.a1agroservice.retrofit.ConfRetrofit;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 
 public abstract class GenericController<Objeto> {
@@ -14,7 +16,7 @@ public abstract class GenericController<Objeto> {
 
     public abstract Call<Objeto> getById(int id);
 
-    public abstract Call<Pessoa> getAll();
+    public abstract ArrayList<Pessoa> getAll();
 
     public abstract void insert(Context contex, Objeto pessoa);
 
