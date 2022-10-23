@@ -1,12 +1,12 @@
 package com.example.a1agroservice.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a1agroservice.R;
 import com.example.a1agroservice.controllers.PessoaController;
@@ -43,17 +43,17 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        try {
-            if (pessoaController.getByUsuario(edUsuario.getText().toString().trim()) != null)
-                if (pessoaController.validaSenha(edUsuario.getText().toString(), edSenha.getText().toString())) {
-                    Toast.makeText(this, "Senha incorreta!", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    Toast.makeText(this, "Bem-Vindo " + pessoaController.getByUsuario(edUsuario.getText().toString()).getNome(), Toast.LENGTH_SHORT).show();
-                }
-        } catch (Exception E) {
-            Toast.makeText(this, "Falha na consulta!", Toast.LENGTH_SHORT).show();
-        }
+//        try {
+//            if (pessoaController.getByUsuario(edUsuario.getText().toString().trim()) != null)
+//                if (pessoaController.validaSenha(edUsuario.getText().toString(), edSenha.getText().toString())) {
+//                    Toast.makeText(this, "Senha incorreta!", Toast.LENGTH_SHORT).show();
+//                    return;
+//                } else {
+//                    Toast.makeText(this, "Bem-Vindo " + pessoaController.getByUsuario(edUsuario.getText().toString()).getNome(), Toast.LENGTH_SHORT).show();
+//                }
+//        } catch (Exception E) {
+//            Toast.makeText(this, "Falha na consulta!", Toast.LENGTH_SHORT).show();
+//        }
 
         //TODO abrir Home Page
 //        Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);

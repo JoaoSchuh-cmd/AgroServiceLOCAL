@@ -11,11 +11,6 @@
     android:layout_marginRight="18dp"
     tools:context=".activities.CadastroActivity">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar"
-        />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -79,13 +74,17 @@
             android:textSize="20dp"
             android:textColor="@color/black"/>
 
-        <EditText
+
+        <com.santalu.maskara.widget.MaskEditText
             android:id="@+id/edWhatsapp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Digite aqui..."
+            android:inputType="number"
             android:textColorHint="@color/black"
-            android:inputType="number"/>
+            app:mask="+__ (__) _ ____-____"
+            app:maskCharacter="_"
+            app:maskStyle="completable"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -96,14 +95,16 @@
             android:textSize="20dp"
             android:textColor="@color/black"/>
 
-        <EditText
+        <com.santalu.maskara.widget.MaskEditText
             android:id="@+id/edCpf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Digite aqui..."
             android:imeActionLabel="usuario"
             android:textColorHint="@color/black"
-            android:inputType="number"/>
+            app:mask="__.. - _"
+            app:maskCharacter=""
+            app:maskStyle="completable"/>
 
         <TextView
             android:layout_width="match_parent"

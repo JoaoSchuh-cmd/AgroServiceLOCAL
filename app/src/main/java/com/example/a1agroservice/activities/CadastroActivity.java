@@ -1,13 +1,11 @@
 package com.example.a1agroservice.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a1agroservice.R;
 import com.example.a1agroservice.controllers.PessoaController;
@@ -37,22 +35,16 @@ public class CadastroActivity extends AppCompatActivity {
 
     public void btSalvarOnCick(View view) {
         Pessoa pessoa = new Pessoa();
-        pessoa.setId(PessoaController.getInstance(this).retornaProximoId());
+        pessoa.setId(PessoaController.getInstance(this).getNextId());
         pessoa.setNome(edNome.getText().toString());
         pessoa.setCpf(edCpf.getText().toString());
         pessoa.setUsuario(edUsuario.getText().toString());
         pessoa.setSenha(edSenha.getText().toString());
         pessoa.setCelular(edWhatsapp.getText().toString());
 
-        pessoaController.insert(this, pessoa);
-
-//        if (pessoaController.getByUsuario(edUsuario.getText().toString()) != null) {
-//            limpaCampos(); // TODO Quando tiver a HomePage, pode excluir isso
-////            abrirHomePage();
-//        } else {
-            limpaCampos();
-            abrirLoginPage();
-//        };
+        pessoaController.savePessoa(pessoa);
+        limpaCampos();
+        abrirLoginPage();
     }
 
     public void abrirLoginPage() {
