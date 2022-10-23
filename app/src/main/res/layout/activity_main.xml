@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:src="@drawable/logo" />
 
     <EditText
-        android:id="@+id/edUsername"
+        android:id="@+id/edUsuario"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -22,12 +22,13 @@
         android:textColor="@color/black" />
 
     <EditText
-        android:id="@+id/edPassword"
+        android:id="@+id/edSenha"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:hint="Senha"
+        android:inputType="textPassword"
         android:textColor="@color/black" />
 
     <LinearLayout
