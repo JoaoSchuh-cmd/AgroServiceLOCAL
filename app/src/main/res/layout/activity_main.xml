@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".activities.MainActivity">
 
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="350dp"
@@ -48,7 +49,7 @@
             android:backgroundTint="@color/green"
             android:textColor="@color/black"
             android:layout_marginRight="15dp"
-            android:onClick="btEntrarOnClick"/>
+            />
 
         <Button
             android:id="@+id/btCadastrar"
@@ -59,7 +60,10 @@
             android:backgroundTint="@color/white"
             android:text="Cadastre-se"
             android:textColor="@color/black"
-            android:onClick="btCadastrarOnClick"/>
+            />
     </LinearLayout>
 
 </LinearLayout>
+
+
+
