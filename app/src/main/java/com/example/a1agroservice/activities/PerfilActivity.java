@@ -1,10 +1,12 @@
-package com.example.a1agroservice;
+package com.example.a1agroservice.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Perfil extends AppCompatActivity {
+import com.example.a1agroservice.R;
+
+public class PerfilActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

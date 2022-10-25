@@ -33,9 +33,8 @@ public class CadastroActivity extends AppCompatActivity {
         abrirLoginPage();
     }
 
-    public void btSalvarOnCick(View view) {
+    public void btSalvarOnClick(View view) {
         Pessoa pessoa = new Pessoa();
-        pessoa.setId(PessoaController.getInstance(this).getNextId());
         pessoa.setNome(edNome.getText().toString());
         pessoa.setCpf(edCpf.getText().toString());
         pessoa.setUsuario(edUsuario.getText().toString());

@@ -102,7 +102,7 @@
             android:hint="Digite aqui..."
             android:imeActionLabel="usuario"
             android:textColorHint="@color/black"
-            app:mask="__.. - _"
+            app:mask="___.___.___-__"
             app:maskCharacter=""
             app:maskStyle="completable"/>
 
@@ -170,7 +170,7 @@
                 tools:layout_editor_absoluteY="550dp"
                 android:backgroundTint="@color/green"
                 android:textColor="@color/black"
-                android:onClick="btSalvarOnCick"/>
+                android:onClick="btSalvarOnClick"/>
 
             <Button
                 android:id="@+id/btVoltar"

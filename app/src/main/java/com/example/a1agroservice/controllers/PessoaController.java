@@ -20,8 +20,8 @@ public class PessoaController {
         return controller == null ? new PessoaController(context) : controller;
     }
 
-    public long getNextId() {
-        return 0;
+    public Pessoa getPessoaByUsername(String username) {
+        return PessoaDao.getInstancia(context).getByUsername(username);
     }
 
     public ArrayList<Pessoa> getPessoas() {

@@ -1,6 +1,8 @@
 package com.example.a1agroservice.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -17,10 +19,10 @@ public class PessoaDao implements GenericDao<Pessoa> {
     private SQLiteDatabase db;
 
     //nome das colunas da tabela
-    private String[]colunas = {"RA_ALUNO", "NOME_ALUNO"};
+    private String[]colunas = {"ID", "NOME", "CPF", "USUARIO", "SENHA", "CELULAR"};
 
     //Nome da Tabela
-    private String tableName = "ALUNO";
+    private String tableName = "PESSOA";
 
     //Contexto no qual o DAO foi chamado
     private Context context;
@@ -44,26 +46,105 @@ public class PessoaDao implements GenericDao<Pessoa> {
 
     @Override
     public boolean insert(Pessoa obj) {
-        return false;
+        ContentValues valores = new ContentValues();
+        valores.put("NOME", obj.getNome());
+        valores.put("CPF", obj.getCpf());
+        valores.put("USUARIO", obj.getUsuario());
+        valores.put("SENHA", obj.getSenha());
+        valores.put("CELULAR", obj.getCelular());
+
+        return db.insert(tableName, null, valores) == 1 ? true : false;
     }
 
     @Override
     public boolean update(Pessoa obj) {
-        return false;
+        String[]identificador = {String.valueOf(obj.getId())};
+
+        ContentValues valores = new ContentValues();
+        valores.put("NOME", obj.getNome());
+        valores.put("CPF", obj.getCpf());
+        valores.put("USUARIO", obj.getUsuario());
+        valores.put("SENHA", obj.getSenha());
+        valores.put("CELULAR", obj.getCelular());
+
+        return db.update(tableName, valores,
+                "ID = ?", identificador) == 1 ? true : false;
     }
 
     @Override
     public boolean delete(Pessoa obj) {
-        return false;
+        String[]identificador = {String.valueOf(obj.getId())};
+
+        ContentValues valores = new ContentValues();
+        valores.put("NOME", obj.getNome());
+        valores.put("CPF", obj.getCpf());
+        valores.put("USUARIO", obj.getUsuario());
+        valores.put("SENHA", obj.getSenha());
+        valores.put("CELULAR", obj.getCelular());
+
+        return db.delete(tableName, "ID = ?", identificador) == 1 ? true : false;
     }
 
     @Override
     public ArrayList<Pessoa> getAll() {
-        return null;
+        ArrayList<Pessoa> listaPessoa = new ArrayList<>();
+
+        Cursor cursor = db.query(tableName, colunas,
+                null, null, null, null,
+                "ID asc");
+        if(cursor.moveToFirst()){
+            do{
+                Pessoa pessoa = new Pessoa();
+                pessoa.setId(cursor.getInt(0));
+                pessoa.setNome(cursor.getString(1));
+                pessoa.setUsuario(cursor.getString(2));
+                pessoa.setSenha(cursor.getString(3));
+                pessoa.setCpf(cursor.getString(4));
+                pessoa.setCelular(cursor.getString(5));
+
+                listaPessoa.add(pessoa);
+            }while(cursor.moveToNext());
+        }
+
+        return listaPessoa;
     }
 
     @Override
     public Pessoa getById(int id) {
-        return null;
+        String[] identificadores = {String.valueOf(id)};
+
+        Cursor cursor = db.query(tableName, colunas,
+                "ID = ?", identificadores, null, null,
+                null);
+
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId(cursor.getInt(0));
+        pessoa.setNome(cursor.getString(1));
+        pessoa.setUsuario(cursor.getString(2));
+        pessoa.setSenha(cursor.getString(3));
+        pessoa.setCpf(cursor.getString(4));
+        pessoa.setCelular(cursor.getString(5));
+
+        return pessoa;
+    }
+
+    public Pessoa getByUsername(String username) {
+        String[] identificadores = {username};
+
+        Cursor cursor = db.query(tableName, colunas,
+                "USUARIO = ?", identificadores, null, null,
+                null);
+
+        Pessoa pessoa = new Pessoa();
+        if (cursor.moveToFirst()) {
+            pessoa.setId(cursor.getInt(0));
+            pessoa.setNome(cursor.getString(1));
+            pessoa.setUsuario(cursor.getString(2));
+            pessoa.setSenha(cursor.getString(3));
+            pessoa.setCpf(cursor.getString(4));
+            pessoa.setCelular(cursor.getString(5));
+        } else pessoa = null;
+
+        return pessoa;
     }
 }
