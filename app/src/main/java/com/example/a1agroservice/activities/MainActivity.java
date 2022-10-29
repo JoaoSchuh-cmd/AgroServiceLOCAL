@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (checkAllFields()) {
             //TODO abrir Home Page
-            //        Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
-            //        startActivity(homePage);
+                    Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
+                    startActivity(homePage);
         }
     }
 
@@ -60,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
                 edSenha.setError("Informe a senha!");
 
             return false;
+        }
+
+        //Somente para testes, usuario admin
+        if (edUsuario.getText().toString().equals("admin") || edSenha.getText().toString().equals("123")) {
+            return true;
         }
 
         if (pessoaController.getPessoaByUsername(edUsuario.getText().toString()) != null) {
