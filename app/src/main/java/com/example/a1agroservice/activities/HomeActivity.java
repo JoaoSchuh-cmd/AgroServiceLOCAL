@@ -12,6 +12,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+
 import com.example.a1agroservice.R;
 
 public class HomeActivity extends AppCompatActivity {
@@ -24,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+        setContentView(R.layout.activity_home);
 
         btMenuPerfil = findViewById(R.id.btMenuPerfil);
         btMenuPesquisa = findViewById(R.id.btMenuPesquisa);
