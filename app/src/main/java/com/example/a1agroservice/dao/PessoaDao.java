@@ -118,12 +118,14 @@ public class PessoaDao implements GenericDao<Pessoa> {
                 null);
 
         Pessoa pessoa = new Pessoa();
-        pessoa.setId(cursor.getInt(0));
-        pessoa.setNome(cursor.getString(1));
-        pessoa.setUsuario(cursor.getString(2));
-        pessoa.setSenha(cursor.getString(3));
-        pessoa.setCpf(cursor.getString(4));
-        pessoa.setCelular(cursor.getString(5));
+        if (cursor.getCount() > 0) {
+            pessoa.setId(cursor.getInt(0));
+            pessoa.setNome(cursor.getString(1));
+            pessoa.setUsuario(cursor.getString(2));
+            pessoa.setSenha(cursor.getString(3));
+            pessoa.setCpf(cursor.getString(4));
+            pessoa.setCelular(cursor.getString(5));
+        }
 
         return pessoa;
     }
@@ -143,7 +145,7 @@ public class PessoaDao implements GenericDao<Pessoa> {
             pessoa.setSenha(cursor.getString(3));
             pessoa.setCpf(cursor.getString(4));
             pessoa.setCelular(cursor.getString(5));
-        } else pessoa = null;
+        }
 
         return pessoa;
     }

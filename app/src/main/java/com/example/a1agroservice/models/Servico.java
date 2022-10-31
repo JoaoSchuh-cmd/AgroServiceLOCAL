@@ -1,20 +1,18 @@
 package com.example.a1agroservice.models;
 
-import java.util.Date;
-
 public class Servico {
 
     private int id;
     private int id_tipo_servico;
     private String descricao;
-    private Date data_inicio;
-    private Date data_fim;
+    private String data_inicio;
+    private String data_fim;
     private Number valorhora;
 
     public Servico() {
     }
 
-    public Servico(int id, int id_tipo_servico, String descricao, Date data_inicio, Date data_fim, Number valorhora) {
+    public Servico(int id, int id_tipo_servico, String descricao, String data_inicio, String data_fim, Number valorhora) {
         this.id = id;
         this.id_tipo_servico = id_tipo_servico;
         this.descricao = descricao;
@@ -47,19 +45,19 @@ public class Servico {
         this.descricao = descricao;
     }
 
-    public Date getData_inicio() {
+    public String getData_inicio() {
         return data_inicio;
     }
 
-    public void setData_inicio(Date data_inicio) {
+    public void setData_inicio(String data_inicio) {
         this.data_inicio = data_inicio;
     }
 
-    public Date getData_fim() {
+    public String getData_fim() {
         return data_fim;
     }
 
-    public void setData_fim(Date data_fim) {
+    public void setData_fim(String data_fim) {
         this.data_fim = data_fim;
     }
 

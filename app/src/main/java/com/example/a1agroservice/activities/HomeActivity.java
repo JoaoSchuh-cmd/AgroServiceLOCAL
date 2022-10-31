@@ -1,27 +1,18 @@
 package com.example.a1agroservice.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.a1agroservice.R;
 
 public class HomeActivity extends AppCompatActivity {
     private Toolbar toolbar;
-
     private ImageButton btMenuPerfil;
     private ImageButton btMenuPesquisa;
 
@@ -48,8 +39,8 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-//        toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+       toolbar = findViewById(R.id.toolbar);
+       setSupportActionBar(toolbar);
     }
 
     public void abrirMenuPerfil(){

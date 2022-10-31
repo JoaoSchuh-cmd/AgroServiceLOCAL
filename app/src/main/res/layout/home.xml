@@ -24,9 +24,7 @@
         android:textSize="15dp"
         android:text="+Criar Anuncio"
         android:backgroundTint="@color/green"
-        android:textColor="@color/black"
-
-        />
+        android:textColor="@color/black"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.a1agroservice.helper.SQLiteDataHelper;
 import com.example.a1agroservice.models.Anuncio;
-import com.example.a1agroservice.models.Pessoa;
 
 import java.util.ArrayList;
 
@@ -107,7 +106,20 @@ public class AnuncioDao implements GenericDao<Anuncio> {
 
     @Override
     public Anuncio getById(int id) {
+        String[] identificadores = {String.valueOf(id)};
 
-        return null;
+        Cursor cursor = db.query(tableName, colunas,
+                "ID = ?", identificadores, null, null,
+                "ID asc");
+
+        Anuncio anuncio = new Anuncio();
+        if(cursor.getCount() > 0) {
+            anuncio.setId(cursor.getInt(0));
+            anuncio.setId_pessoa(cursor.getInt(1));
+            anuncio.setId_servico(cursor.getInt(2));
+            anuncio.setId_endereco(cursor.getInt(3));
+        }
+
+        return anuncio;
     }
 }

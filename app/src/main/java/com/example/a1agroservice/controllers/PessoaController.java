@@ -13,7 +13,6 @@ public class PessoaController {
 
     public PessoaController(Context context) {
         this.context = context;
-        this.controller = controller;
     }
 
     public static PessoaController getInstance(Context context) {
@@ -24,12 +23,20 @@ public class PessoaController {
         return PessoaDao.getInstancia(context).getByUsername(username);
     }
 
+    public Pessoa getPessoaById(int id) {
+        return PessoaDao.getInstancia(context).getById(id);
+    }
+
     public ArrayList<Pessoa> getPessoas() {
        return PessoaDao.getInstancia(context).getAll();
     }
 
     public boolean savePessoa(Pessoa pessoa) {
         return PessoaDao.getInstancia(context).insert(pessoa);
+    }
+
+    public boolean deletePessoa(Pessoa pessoa) {
+        return PessoaDao.getInstancia(context).delete(pessoa);
     }
 
 }
