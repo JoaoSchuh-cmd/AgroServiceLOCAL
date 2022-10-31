@@ -12,7 +12,6 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.a1agroservice.R;
 
 public class HomeActivity extends AppCompatActivity {
-    private Toolbar toolbar;
     private ImageButton btMenuPerfil;
     private ImageButton btMenuPesquisa;
 
@@ -39,40 +38,15 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-       toolbar = findViewById(R.id.toolbar);
-       setSupportActionBar(toolbar);
     }
 
     public void abrirMenuPerfil(){
         Intent intent = new Intent(this, PerfilActivity.class);
         startActivity(intent);
-
     }
 
     public void abrirMenuPesquisa(){
         //TODO: implementar o método de pesquisa
         Toast.makeText(this, "Clicou no Menu Pesquisa!", Toast.LENGTH_LONG).show();
     }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        int id = item.getItemId();
-//
-//        if(id == R.id.opcion1) {
-//            Toast.makeText(this, "OPÇÃO", Toast.LENGTH_SHORT).show();
-//        } else if(id == R.id.opcion2) {
-//            Toast.makeText(this, "OPÇÃO", Toast.LENGTH_SHORT).show();
-//        } else if(id == R.id.pessoa) {
-//            Toast.makeText(this, "PESSOA", Toast.LENGTH_SHORT).show();
-//        } else if(id == R.id.buscar) {
-//            Toast.makeText(this, "BUSCAR", Toast.LENGTH_SHORT).show();
-//        }
-//
-//        return true;
-//    }
 }

@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
     private void importarComponentes() {
         edUsuario = findViewById(R.id.edUsuario);
         edSenha = findViewById(R.id.edSenha);
-
     }
 
     private void limpaCampos() {
