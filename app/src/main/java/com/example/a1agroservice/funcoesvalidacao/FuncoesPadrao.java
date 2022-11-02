@@ -2,8 +2,8 @@ package com.example.a1agroservice.funcoesvalidacao;
 
 public class FuncoesPadrao {
     //TODO Funções Padrão Ex: Validações, máscaras.....
-    public static void validaCPF(String cpf) {
-        ValidaCPF.isCPF(cpf);
+    public static boolean validaCPF(String cpf) {
+        return ValidaCPF.isCPF(cpf);
     }
 
     public static void FormatCELULAR(String celular) {

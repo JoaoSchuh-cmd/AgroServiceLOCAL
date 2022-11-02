@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a1agroservice.R;
 import com.example.a1agroservice.controllers.PessoaController;
+import com.example.a1agroservice.funcoesvalidacao.FuncoesPadrao;
 import com.example.a1agroservice.models.Pessoa;
 import com.example.a1agroservice.singleton.Login;
 
@@ -34,6 +35,12 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public void btSalvarOnClick(View view) {
+
+        if (FuncoesPadrao.validaCPF(edCpf.getText().toString()) == false) {
+            edCpf.setError("CPF INVÁLIDO");
+            return;
+        }
+
         Pessoa pessoa = new Pessoa();
         pessoa.setNome(edNome.getText().toString());
         pessoa.setCpf(edCpf.getText().toString());
@@ -58,13 +65,6 @@ public class CadastroActivity extends AppCompatActivity {
 //        startActivity(homePage);
     }
 
-    //TODO Acho q não vai precisar desse pq já fiz as validações na API mas tem q ver como trabalhar com as respostas dela;
-//    private void validaCamposVazios() {
-//        if (edNome.getText().toString().isEmpty()) {
-//            Toast.makeText(this, "Campo nome é obrigatório", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//    }
     private void iniciaComponentes() {
         edNome = findViewById(R.id.edNome);
         edWhatsapp = findViewById(R.id.edWhatsapp);
