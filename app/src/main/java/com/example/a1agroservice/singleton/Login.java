@@ -13,4 +13,8 @@ public class Login {
     public static Login getUsuarioLogado(String usuario, String senha) {
         return usuarioLogado == null ? new Login(usuario, senha) : usuarioLogado;
     }
+
+    public static Login getUsuarioLogado() {
+        return usuarioLogado;
+    }
 }

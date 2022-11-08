@@ -29,11 +29,33 @@
             android:id="@+id/toolbar"
             layout="@layout/layout_menu" />
 
-        <ListView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/lvLista"
-            android:background="@color/green"/>
+            android:orientation="vertical"
+            android:background="@color/green">
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/lvLista"
+                android:background="@color/green"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tvListaVaziaMsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="250dp"
+                android:text="Você não possui açudes cadastrados! \n Cadastre um açude!"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

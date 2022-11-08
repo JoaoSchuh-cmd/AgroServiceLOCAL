@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/green">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="0dp"
+        android:paddingTop="10dp"
+        android:paddingHorizontal="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="2"
+                android:id="@+id/btFuncionario"
+                android:text="Funcionário"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/green"
+                android:backgroundTint="@color/white"
+                android:layout_marginRight="10dp"/>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="2"
+                android:id="@+id/btProprietario"
+                android:text="Proprietário"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/green"
+                android:backgroundTint="@color/white"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nome:"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="DigiteAqui..."
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
+            android:id="@+id/edNome" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Celular:"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+        <com.santalu.maskara.widget.MaskEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Digite Aqui..."
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
+            android:id="@+id/edCelular"
+            app:mask="+55 (__) _ ____-____"
+            app:maskStyle="completable"
+            app:maskCharacter="_"/>
+
+        <include android:id="@+id/layoutPeriodo"
+            layout="@layout/input_endereco"/>
+
+        <include android:id="@+id/layoutTipoServico"
+            layout="@layout/input_tiposervico"/>
+
+        <include android:id="@+id/layoutValorHora"
+            layout="@layout/input_valorhora"/>
+
+        <include android:id="@+id/layoutDescricao"
+            layout="@layout/input_descricao"/>
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:text="Salvar"
+            android:textColor="@color/green"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

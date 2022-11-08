@@ -27,7 +27,8 @@
             android:textSize="24dp"
             android:layout_gravity="center"
             android:textColor="@color/white"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textStyle="bold"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -36,6 +37,7 @@
             android:id="@+id/btMenuPesquisa"
             android:layout_margin="10dp"
             android:layout_gravity="center"/>
+
     </LinearLayout>
 
 </LinearLayout>

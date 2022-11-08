@@ -79,10 +79,10 @@
             android:id="@+id/edWhatsapp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Digite aqui..."
             android:inputType="number"
             android:textColorHint="@color/black"
-            app:mask="+__ (__) _ ____-____"
+            android:hint="Digite aqui..."
+            app:mask="+55 (__) _ ____-____"
             app:maskCharacter="_"
             app:maskStyle="completable"/>
 
@@ -104,7 +104,7 @@
             android:textColorHint="@color/black"
             app:mask="___.___.___-__"
             app:maskCharacter=""
-            app:maskStyle="completable"/>
+            app:maskStyle="persistent"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -169,7 +169,7 @@
                 tools:layout_editor_absoluteX="54dp"
                 tools:layout_editor_absoluteY="550dp"
                 android:backgroundTint="@color/green"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:onClick="btSalvarOnClick"/>
 
             <Button

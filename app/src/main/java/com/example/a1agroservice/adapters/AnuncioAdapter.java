@@ -1,4 +1,4 @@
-package com.example.a1agroservice;
+package com.example.a1agroservice.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 
+import com.example.a1agroservice.R;
 import com.example.a1agroservice.controllers.EnderecoController;
 import com.example.a1agroservice.controllers.PessoaController;
 import com.example.a1agroservice.controllers.ServicoController;
