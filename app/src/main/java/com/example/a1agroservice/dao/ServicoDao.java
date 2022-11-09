@@ -56,14 +56,14 @@ public class ServicoDao implements GenericDao<Servico> {
     }
 
     @Override
-    public boolean update(Servico obj) {
-        String[]identificador = {String.valueOf(obj.getId())};
+    public boolean update(long oldServicoId, Servico newServico) {
+        String[]identificador = {String.valueOf(oldServicoId)};
 
         ContentValues valores = new ContentValues();
-        valores.put("DESCRICAO", obj.getDescricao());
-        valores.put("DATA_INICIO", String.valueOf(obj.getData_inicio()));
-        valores.put("DATA_FIM", String.valueOf(obj.getData_fim()));
-        valores.put("ID_TIPO_SERVICO", obj.getId_tipo_servico());
+        valores.put("DESCRICAO", newServico.getDescricao());
+        valores.put("DATA_INICIO", String.valueOf(newServico.getData_inicio()));
+        valores.put("DATA_FIM", String.valueOf(newServico.getData_fim()));
+        valores.put("ID_TIPO_SERVICO", newServico.getId_tipo_servico());
 
         return db.update(tableName, valores,
                 "ID = ?", identificador) == 1 ? true : false;

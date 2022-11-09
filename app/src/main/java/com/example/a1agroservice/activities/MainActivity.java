@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.a1agroservice.R;
 import com.example.a1agroservice.controllers.PessoaController;
+import com.example.a1agroservice.models.Pessoa;
 import com.example.a1agroservice.singleton.Login;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,34 +44,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btEntrarOnClick(View view) {
-
         if (checkAllFields()) {
-            //TODO abrir Home Page
-                    Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
-                    startActivity(homePage);
+            Login.getUsuarioLogado(edUsuario.getText().toString(), edSenha.getText().toString());
+
+            Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(homePage);
         }
     }
 
     private boolean checkAllFields() {
-        if (edUsuario.getText().toString().isEmpty() || edSenha.getText().toString().isEmpty()) {
-            if (edUsuario.getText().toString().isEmpty())
-                edUsuario.setError("Informe um usuário!");
-
-            if (edSenha.getText().toString().isEmpty())
-                edSenha.setError("Informe a senha!");
-
-            return false;
-        }
-
-        //Somente para testes, usuario admin
-        if (edUsuario.getText().toString().equals("admin") || edSenha.getText().toString().equals("123")) {
-            return true;
-        }
-
-        if (pessoaController.getPessoaByUsername(edUsuario.getText().toString()) != null) {
-            if (edSenha.getText().toString().equals(pessoaController.getPessoaByUsername(edUsuario.getText().toString()).getSenha())) {
+        Pessoa pessoa = pessoaController.getPessoaByUsername(edUsuario.getText().toString());
+        if (pessoa != null) {
+            if (edSenha.getText().toString().equals(pessoa.getSenha())) {
                 Login.getUsuarioLogado(edUsuario.getText().toString(), edSenha.getText().toString());
-                Toast.makeText(this, "Bem-vindo " + edUsuario.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Bem-vindo " + pessoa.getNome(), Toast.LENGTH_SHORT).show();
                 return true;
             } else {
                 edSenha.setError("Senha incorreta!");

@@ -53,11 +53,11 @@ public class TipoServicoDao implements GenericDao<TipoServico> {
     }
 
     @Override
-    public boolean update(TipoServico obj) {
-        String[]identificador = {String.valueOf(obj.getId())};
+    public boolean update(long oldTipoServicoId, TipoServico newTipoServico) {
+        String[]identificador = {String.valueOf(oldTipoServicoId)};
 
         ContentValues valores = new ContentValues();
-        valores.put("NOME", obj.getNome());
+        valores.put("NOME", newTipoServico.getNome());
 
         return db.update(tableName, valores,
                 "ID = ?", identificador) == 1 ? true : false;

@@ -57,14 +57,14 @@ public class AnuncioDao implements GenericDao<Anuncio> {
     }
 
     @Override
-    public boolean update(Anuncio obj) {
-        String[]identificador = {String.valueOf(obj.getId())};
+    public boolean update(long oldAnuncioId, Anuncio newAnuncio) {
+        String[]identificador = {String.valueOf(oldAnuncioId)};
 
         ContentValues values = new ContentValues();
-        values.put("ID", obj.getId());
-        values.put("ID_PESSOA", obj.getId_pessoa());
-        values.put("ID_SERVICO", obj.getId_servico());
-        values.put("ID_ENDERECO", obj.getId_endereco());
+        values.put("ID", newAnuncio.getId());
+        values.put("ID_PESSOA", newAnuncio.getId_pessoa());
+        values.put("ID_SERVICO", newAnuncio.getId_servico());
+        values.put("ID_ENDERECO", newAnuncio.getId_endereco());
 
         return db.update(tableName, values, "ID = ?", identificador) == 1 ? true : false;
     }

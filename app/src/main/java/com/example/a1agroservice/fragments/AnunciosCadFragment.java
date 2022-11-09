@@ -31,9 +31,13 @@ public class AnunciosCadFragment extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        tipoServicos = new ArrayList();
+        //TODO Dois problemas: o primeiro é que as vezes não consegue carregar a Fragment por motivo desconhecido. Cai fora nesse onCreateView do super
+        super.onCreateView(inflater, container, savedInstanceState);
 
-        View view = new View(context);
+//        View view = new View(context);
+        View view = LayoutInflater.from(context).inflate(R.layout.anunciocad_fragment_dialog, container, false);
+
+        tipoServicos = new ArrayList();
 
         spTipoServico = view.findViewById(R.id.spTipoServico);
 
@@ -42,10 +46,9 @@ public class AnunciosCadFragment extends DialogFragment {
 
         TipoServicoAdapter adapterTipoServico = new TipoServicoAdapter(context, tipoServicos);
 
-        //TODO Bo aqui, não está carregando corretamente esse Spinner;
+        //TODO o outro problema é que não está conseguindo settar o adapter nesse Spinner aqui.
         spTipoServico.setAdapter(adapterTipoServico);
 
-        super.onCreateView(inflater, container, savedInstanceState);
         return inflater.inflate(R.layout.anunciocad_fragment_dialog, container, false);
     }
 }

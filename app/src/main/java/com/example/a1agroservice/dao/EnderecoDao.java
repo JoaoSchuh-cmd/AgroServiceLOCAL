@@ -55,13 +55,13 @@ public class EnderecoDao implements GenericDao<Endereco> {
     }
 
     @Override
-    public boolean update(Endereco obj) {
-        String[]identificador = {String.valueOf(obj.getId())};
+    public boolean update(long oldEnderecoId, Endereco newEndereco) {
+        String[]identificador = {String.valueOf(oldEnderecoId)};
 
         ContentValues valores = new ContentValues();
-        valores.put("CIDADE", obj.getCidade());
-        valores.put("ESTADO", obj.getEstado());
-        valores.put("CEP", obj.getCep());
+        valores.put("CIDADE", newEndereco.getCidade());
+        valores.put("ESTADO", newEndereco.getEstado());
+        valores.put("CEP", newEndereco.getCep());
 
         return db.update(tableName, valores,
                 "ID = ?", identificador) == 1 ? true : false;

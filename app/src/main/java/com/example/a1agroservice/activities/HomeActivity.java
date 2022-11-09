@@ -1,6 +1,5 @@
 package com.example.a1agroservice.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.a1agroservice.adapters.AnuncioAdapter;
 import com.example.a1agroservice.R;
 import com.example.a1agroservice.controllers.AnuncioController;
+import com.example.a1agroservice.fragments.AnunciosCadFragment;
 import com.example.a1agroservice.fragments.FiltrosFragment;
+import com.example.a1agroservice.fragments.MenuPerfilFragment;
 import com.example.a1agroservice.models.Anuncio;
 
 import java.util.ArrayList;
@@ -83,12 +84,17 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void abrirMenuPerfil(){
-        Intent intent = new Intent(this, PerfilActivity.class);
-        startActivity(intent);
+        MenuPerfilFragment menuPerfilFragment = new MenuPerfilFragment(this);
+        menuPerfilFragment.show(getSupportFragmentManager(), "MenuPerfil");
     }
 
     public void abrirMenuPesquisa(){
         FiltrosFragment filtrosFragment = new FiltrosFragment(this);
         filtrosFragment.show(getSupportFragmentManager(), "Filtros");
+    }
+
+    public void btCriarAnuncioOnClick(View view) {
+        AnunciosCadFragment anunciosCadFragment = new AnunciosCadFragment(this);
+        anunciosCadFragment.show(getSupportFragmentManager(), "Cadastro Anúncio");
     }
 }

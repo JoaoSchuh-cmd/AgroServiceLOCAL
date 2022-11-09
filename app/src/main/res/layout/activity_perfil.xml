@@ -7,12 +7,11 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="5dp"
     android:orientation="vertical"
-    tools:context=".activities.CadastroActivity">
+    tools:context=".activities.PerfilActivity">
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar"
-        />
+        layout="@layout/toolbar" />
 
     <LinearLayout
         android:layout_marginLeft="18dp"
@@ -31,7 +30,8 @@
             android:layout_marginLeft="169dp"
             android:text="Remover conta"
             android:textSize="15dp"
-            android:backgroundTint="@color/red"/>
+            android:backgroundTint="@color/red"
+            android:onClick="btRemoverClick"/>
 
         <TextView
             style="@style/BoldHeadlines"
@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Digite aqui..."
-            android:imeActionLabel="usuario"
+            android:inputType="number"
             android:textColorHint="@color/black"
             app:mask="__.. - _"
             app:maskCharacter=""

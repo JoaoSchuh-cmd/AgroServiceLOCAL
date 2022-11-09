@@ -35,6 +35,10 @@ public class PessoaController {
         return PessoaDao.getInstancia(context).insert(pessoa);
     }
 
+    public boolean updatePessoa(Pessoa oldP, Pessoa newP) {
+        return PessoaDao.getInstancia(context).update(oldP.getId(), newP);
+    }
+
     public boolean deletePessoa(Pessoa pessoa) {
         return PessoaDao.getInstancia(context).delete(pessoa);
     }

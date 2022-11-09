@@ -19,7 +19,7 @@ public class PessoaDao implements GenericDao<Pessoa> {
     private SQLiteDatabase db;
 
     //nome das colunas da tabela
-    private String[]colunas = {"ID", "NOME", "CPF", "USUARIO", "SENHA", "CELULAR"};
+    private String[]colunas = {"ID", "NOME", "CELULAR", "CPF", "USUARIO", "SENHA"};
 
     //Nome da Tabela
     private String tableName = "PESSOA";
@@ -48,24 +48,24 @@ public class PessoaDao implements GenericDao<Pessoa> {
     public boolean insert(Pessoa obj) {
         ContentValues valores = new ContentValues();
         valores.put("NOME", obj.getNome());
+        valores.put("CELULAR", obj.getCelular());
         valores.put("CPF", obj.getCpf());
         valores.put("USUARIO", obj.getUsuario());
         valores.put("SENHA", obj.getSenha());
-        valores.put("CELULAR", obj.getCelular());
 
         return db.insert(tableName, null, valores) == 1 ? true : false;
     }
 
     @Override
-    public boolean update(Pessoa obj) {
-        String[]identificador = {String.valueOf(obj.getId())};
+    public boolean update(long oldPessoaId, Pessoa newPessoa) {
+        String[]identificador = {String.valueOf(oldPessoaId)};
 
         ContentValues valores = new ContentValues();
-        valores.put("NOME", obj.getNome());
-        valores.put("CPF", obj.getCpf());
-        valores.put("USUARIO", obj.getUsuario());
-        valores.put("SENHA", obj.getSenha());
-        valores.put("CELULAR", obj.getCelular());
+        valores.put("NOME", newPessoa.getNome());
+        valores.put("CELULAR", newPessoa.getCelular());
+        valores.put("CPF", newPessoa.getCpf());
+        valores.put("USUARIO", newPessoa.getUsuario());
+        valores.put("SENHA", newPessoa.getSenha());
 
         return db.update(tableName, valores,
                 "ID = ?", identificador) == 1 ? true : false;
@@ -121,10 +121,10 @@ public class PessoaDao implements GenericDao<Pessoa> {
         if (cursor.getCount() > 0) {
             pessoa.setId(cursor.getInt(0));
             pessoa.setNome(cursor.getString(1));
-            pessoa.setUsuario(cursor.getString(2));
-            pessoa.setSenha(cursor.getString(3));
-            pessoa.setCpf(cursor.getString(4));
-            pessoa.setCelular(cursor.getString(5));
+            pessoa.setCelular(cursor.getString(22));
+            pessoa.setCpf(cursor.getString(3));
+            pessoa.setUsuario(cursor.getString(4));
+            pessoa.setSenha(cursor.getString(5));
         }
 
         return pessoa;
@@ -141,10 +141,12 @@ public class PessoaDao implements GenericDao<Pessoa> {
         if (cursor.moveToFirst()) {
             pessoa.setId(cursor.getInt(0));
             pessoa.setNome(cursor.getString(1));
-            pessoa.setUsuario(cursor.getString(2));
-            pessoa.setSenha(cursor.getString(3));
-            pessoa.setCpf(cursor.getString(4));
-            pessoa.setCelular(cursor.getString(5));
+            pessoa.setCelular(cursor.getString(2));
+            pessoa.setCpf(cursor.getString(3));
+            pessoa.setUsuario(cursor.getString(4));
+            pessoa.setSenha(cursor.getString(5));
+        } else {
+            pessoa = null;
         }
 
         return pessoa;
