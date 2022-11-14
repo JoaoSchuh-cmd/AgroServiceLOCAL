@@ -19,7 +19,7 @@ public class ServicoController {
         return controller == null ? new ServicoController(context) : controller;
     }
 
-    public Servico getServicoById(int id) {
+    public Servico getServicoById(long id) {
         return ServicoDao.getInstancia(context).getById(id);
     }
 
@@ -29,6 +29,10 @@ public class ServicoController {
 
     public boolean saveServico(Servico Servico) {
         return ServicoDao.getInstancia(context).insert(Servico);
+    }
+
+    public Servico getLastServico() {
+        return ServicoDao.getInstancia(context).getLastServico();
     }
 
     public boolean deleteServico(Servico Servico) {

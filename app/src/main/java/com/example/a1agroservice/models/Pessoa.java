@@ -15,7 +15,7 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(int id, String nome, String cpf, String usuario, String senha, String celular) {
+    public Pessoa(long id, String nome, String cpf, String usuario, String senha, String celular) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;

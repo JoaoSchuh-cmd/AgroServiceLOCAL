@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.a1agroservice.helper.SQLiteDataHelper;
 import com.example.a1agroservice.models.Servico;
@@ -19,7 +21,7 @@ public class ServicoDao implements GenericDao<Servico> {
     private SQLiteDatabase db;
 
     //nome das colunas da tabela
-    private String[]colunas = {"ID", "DESCRICAO", "DATA_INICIO", "DATA_FIM", "ID_TIPO_SERVICO"};
+    private String[]colunas = {"ID", "DESCRICAO", "DATA_INICIO", "DATA_FIM", "ID_TIPO_SERVICO", "VALOR_HORA"};
 
     //Nome da Tabela
     private String tableName = "SERVICO";
@@ -30,7 +32,9 @@ public class ServicoDao implements GenericDao<Servico> {
     private static ServicoDao instancia;
 
     public static ServicoDao getInstancia(Context context){
-        return (instancia == null ? new ServicoDao(context) : instancia);
+        if (instancia == null)
+            instancia = new ServicoDao(context);
+        return instancia;
     }
 
     //Construtor
@@ -51,6 +55,7 @@ public class ServicoDao implements GenericDao<Servico> {
         valores.put("DATA_INICIO", String.valueOf(obj.getData_inicio()));
         valores.put("DATA_FIM", String.valueOf(obj.getData_fim()));
         valores.put("ID_TIPO_SERVICO", obj.getId_tipo_servico());
+        valores.put("VALOR_HORA", obj.getValorhora());
 
         return db.insert(tableName, null, valores) == 1 ? true : false;
     }
@@ -64,6 +69,7 @@ public class ServicoDao implements GenericDao<Servico> {
         valores.put("DATA_INICIO", String.valueOf(newServico.getData_inicio()));
         valores.put("DATA_FIM", String.valueOf(newServico.getData_fim()));
         valores.put("ID_TIPO_SERVICO", newServico.getId_tipo_servico());
+        valores.put("VALOR_HORA", newServico.getValorhora());
 
         return db.update(tableName, valores,
                 "ID = ?", identificador) == 1 ? true : false;
@@ -78,6 +84,7 @@ public class ServicoDao implements GenericDao<Servico> {
         valores.put("DATA_INICIO", obj.getData_inicio());
         valores.put("DATA_FIM", obj.getData_fim());
         valores.put("ID_TIPO_SERVICO", obj.getId_tipo_servico());
+        valores.put("VALOR_HORA", obj.getValorhora());
 
         return db.delete(tableName, "ID = ?", identificador) == 1 ? true : false;
     }
@@ -92,14 +99,15 @@ public class ServicoDao implements GenericDao<Servico> {
 
         if(cursor.moveToFirst()){
             do{
-                Servico Servico = new Servico();
-                Servico.setId(cursor.getInt(0));
-                Servico.setDescricao(cursor.getString(1));
-                Servico.setData_inicio(cursor.getString(2));
-                Servico.setData_fim(cursor.getString(3));
-                Servico.setId_tipo_servico(cursor.getInt(4));
+                Servico servico = new Servico();
+                servico.setId(cursor.getInt(0));
+                servico.setDescricao(cursor.getString(1));
+                servico.setData_inicio(cursor.getString(2));
+                servico.setData_fim(cursor.getString(3));
+                servico.setId_tipo_servico(cursor.getInt(4));
+                servico.setValorhora(cursor.getDouble(5));
 
-                listaServico.add(Servico);
+                listaServico.add(servico);
             }while(cursor.moveToNext());
         }
 
@@ -107,8 +115,8 @@ public class ServicoDao implements GenericDao<Servico> {
     }
 
     @Override
-    public Servico getById(int id) {
-        Servico servico;
+    public Servico getById(long id) {
+        Servico servico = new Servico();
 
         String[] identificadores = {String.valueOf(id)};
 
@@ -116,13 +124,41 @@ public class ServicoDao implements GenericDao<Servico> {
                 "ID = ?", identificadores, null, null,
                 null);
 
-        servico = null;
-        if (cursor.getCount() > 0) {
-            servico.setId(cursor.getInt(0));
+        if (cursor.moveToFirst()) {
+            servico.setId(cursor.getLong(0));
             servico.setDescricao(cursor.getString(1));
             servico.setData_inicio(cursor.getString(2));
             servico.setData_fim(cursor.getString(3));
             servico.setId_tipo_servico(cursor.getInt(4));
+            servico.setValorhora(cursor.getDouble(5));
+        } else {
+            servico = null;
+        }
+
+        return servico;
+    }
+
+    public Servico getLastServico() {
+        Servico servico = new Servico();
+
+        Cursor cursor =
+                db.query(tableName, colunas, null, null, null, null, "ID DESC");
+
+        if (cursor.moveToFirst()) {
+            try {
+                servico.setId(cursor.getLong(0));
+                servico.setDescricao(cursor.getString(1));
+                servico.setData_inicio(cursor.getString(2));
+                servico.setData_fim(cursor.getString(3));
+                servico.setId_tipo_servico(cursor.getInt(4));
+                servico.setValorhora(cursor.getDouble(5));
+            } catch (Exception E) {
+                Toast.makeText(context, "Erro ao carregar último serviço cadastrado", Toast.LENGTH_SHORT).show();
+                Log.e("GetLastSerice", E.getMessage());
+            }
+
+        } else {
+            servico = null;
         }
 
         return servico;

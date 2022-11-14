@@ -14,5 +14,5 @@ dependencyResolutionManagement {
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
 }
-rootProject.name = "1AgroService"
+rootProject.name = "AgroService"
 include ':app'

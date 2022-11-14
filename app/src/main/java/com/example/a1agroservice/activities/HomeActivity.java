@@ -1,12 +1,16 @@
 package com.example.a1agroservice.activities;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.a1agroservice.adapters.AnuncioAdapter;
 import com.example.a1agroservice.R;
@@ -27,11 +31,15 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvListaVaziaMsg;
     private AnuncioController anuncioController;
 
+    private SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        swipeRefreshLayout = findViewById(R.id.swipeLayout);
 
         btMenuPerfil = findViewById(R.id.btMenuPerfil);
         btMenuPesquisa = findViewById(R.id.btMenuPesquisa);
@@ -39,6 +47,14 @@ public class HomeActivity extends AppCompatActivity {
         tvListaVaziaMsg = findViewById(R.id.tvListaVaziaMsg);
 
         anuncioController = new AnuncioController(this);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                carregaAnuncios();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         btMenuPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +73,7 @@ public class HomeActivity extends AppCompatActivity {
         carregaAnuncios();
 
     }
+
 
     private void carregaAnuncios() {
         atualizaListaAnuncios();
@@ -78,7 +95,7 @@ public class HomeActivity extends AppCompatActivity {
         anuncios = new ArrayList<>();
         anuncios = anuncioController.getAnuncios();
         AnuncioAdapter adapter = new AnuncioAdapter(
-                anuncios, this);
+                anuncios, this, this);
 
         lvListaAnuncios.setAdapter(adapter);
     }
@@ -94,7 +111,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void btCriarAnuncioOnClick(View view) {
-        AnunciosCadFragment anunciosCadFragment = new AnunciosCadFragment(this);
-        anunciosCadFragment.show(getSupportFragmentManager(), "Cadastro Anúncio");
+        try {
+            AnunciosCadFragment anunciosCadFragment = new AnunciosCadFragment(this);
+            anunciosCadFragment.show(getSupportFragmentManager(), "Cadastro Anúncio");
+        } catch (Exception E) {
+            Toast.makeText(this, "Erro ao abrir tela de cadastro de anúncios!", Toast.LENGTH_SHORT).show();
+            Log.e("OpenFragment", E.getMessage());
+        }
+
     }
 }

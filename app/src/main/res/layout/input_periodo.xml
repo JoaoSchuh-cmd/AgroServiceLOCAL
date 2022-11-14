@@ -34,15 +34,13 @@
                 android:textSize="19dp"
                 android:textColor="@color/white"/>
 
-            <com.santalu.maskara.widget.MaskEditText
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/white"
                 android:id="@+id/edDataInicial"
-                app:mask="__/__/____"
-                app:maskCharacter="_"
-                app:maskStyle="completable"/>
+                android:inputType="number"/>
 
         </LinearLayout>
 
@@ -60,15 +58,13 @@
                 android:textSize="19dp"
                 android:textColor="@color/white"/>
 
-            <com.santalu.maskara.widget.MaskEditText
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/white"
-                android:id="@+id/edDatafinal"
-                app:mask="__/__/____"
-                app:maskCharacter="_"
-                app:maskStyle="completable"/>
+                android:id="@+id/edDataFinal"
+                android:inputType="number"/>
 
         </LinearLayout>
 

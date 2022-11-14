@@ -2,17 +2,17 @@ package com.example.a1agroservice.models;
 
 public class Servico {
 
-    private int id;
-    private int id_tipo_servico;
+    private long id;
+    private long id_tipo_servico;
     private String descricao;
     private String data_inicio;
     private String data_fim;
-    private Number valorhora;
+    private double valorhora;
 
     public Servico() {
     }
 
-    public Servico(int id, int id_tipo_servico, String descricao, String data_inicio, String data_fim, Number valorhora) {
+    public Servico(long id, long id_tipo_servico, String descricao, String data_inicio, String data_fim, double valorhora) {
         this.id = id;
         this.id_tipo_servico = id_tipo_servico;
         this.descricao = descricao;
@@ -21,19 +21,19 @@ public class Servico {
         this.valorhora = valorhora;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId_tipo_servico() {
+    public long getId_tipo_servico() {
         return id_tipo_servico;
     }
 
-    public void setId_tipo_servico(int id_tipo_servico) {
+    public void setId_tipo_servico(long id_tipo_servico) {
         this.id_tipo_servico = id_tipo_servico;
     }
 
@@ -61,11 +61,11 @@ public class Servico {
         this.data_fim = data_fim;
     }
 
-    public Number getValorhora() {
+    public double getValorhora() {
         return valorhora;
     }
 
-    public void setValorhora(Number valorhora) {
+    public void setValorhora(double valorhora) {
         this.valorhora = valorhora;
     }
 

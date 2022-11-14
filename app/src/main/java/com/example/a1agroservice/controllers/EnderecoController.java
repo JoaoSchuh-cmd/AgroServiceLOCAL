@@ -16,11 +16,17 @@ public class EnderecoController {
     }
 
     public static EnderecoController getInstance(Context context) {
-        return controller == null ? new EnderecoController(context) : controller;
+        if (controller == null)
+            controller = new EnderecoController(context);
+        return controller;
     }
 
-    public Endereco getEnderecoById(int id) {
+    public Endereco getEnderecoById(long id) {
         return EnderecoDao.getInstancia(context).getById(id);
+    }
+
+    public Endereco getLastEndereco() {
+        return EnderecoDao.getInstancia(context).getLastEndereco();
     }
 
     public ArrayList<Endereco> getEnderecos() {

@@ -31,6 +31,9 @@ public class SQLiteDataHelper extends SQLiteOpenHelper {
                     "ID_PESSOA INTEGER NOT NULL," +
                     "ID_SERVICO INTEGER NOT NULL," +
                     "ID_ENDERECO INTEGER NOT NULL," +
+                    "NOME_PROPRIETARIO VARCHAR(30) NOT NULL," +
+                    "CELULAR VARCHAR(20) NOT NULL," +
+                    "TIPO_PESSOA CHAR NOT NULL," +
                     "CONSTRAINT FK_ID_PESSOA FOREIGN KEY (ID_PESSOA)" +
                         "REFERENCES PESSOA (ID)," +
                     "CONSTRAINT FK_ID_SERVICO FOREIGN KEY (ID_SERVICO)" +
@@ -42,15 +45,15 @@ public class SQLiteDataHelper extends SQLiteOpenHelper {
                 "CREATE TABLE ENDERECO (" +
                         "ID INTEGER PRIMARY KEY," +
                         "CIDADE VARCHAR(120) NOT NULL," +
-                        "ESTADO VARCHAR(20) NOT NULL," +
-                        "CEP VARCHAR(9) NOT NULL" +
+                        "ESTADO VARCHAR(20) NOT NULL"+
                     ")");
         db.execSQL(
                 "CREATE TABLE SERVICO (" +
                         "ID INTEGER PRIMARY KEY," +
-                        "DESCRICAO VARCHAR(60) NOT NULL," +
+                        "DESCRICAO VARCHAR(60)," +
                         "DATA_INICIO DATE_TIME NOT NULL," +
                         "DATA_FIM DATE_TIME NOT NULL," +
+                        "VALOR_HORA DOUBLE NOT NULL," +
                         "ID_TIPO_SERVICO INTEGER NOT NULL," +
                         "CONSTRAINT FK_ID_TIPO_SERVICO FOREIGN KEY (ID_TIPO_SERVICO)" +
                             "REFERENCES TIPO_SERVICO (ID)" +
@@ -60,6 +63,10 @@ public class SQLiteDataHelper extends SQLiteOpenHelper {
                         "ID INTEGER PRIMARY KEY," +
                         "NOME VARCHAR(20)" +
                     ")");
+
+        db.execSQL("INSERT INTO TIPO_SERVICO (NOME) VALUES " +
+                "   ('Colheita')," +
+                "   ('Plantio')");
     }
 
     @Override

@@ -94,8 +94,7 @@ public class TipoServicoDao implements GenericDao<TipoServico> {
     }
 
     @Override
-    public TipoServico getById(int id) {
-
+    public TipoServico getById(long id) {
 
         String[] identificadores = {String.valueOf(id)};
 
@@ -104,8 +103,8 @@ public class TipoServicoDao implements GenericDao<TipoServico> {
                 null);
 
         TipoServico tipoServico = new TipoServico();
-        if (cursor.getCount() > 0) {
-            tipoServico.setId(cursor.getInt(0));
+        if (cursor.moveToFirst()) {
+            tipoServico.setId(cursor.getLong(0));
             tipoServico.setNome(cursor.getString(1));
         }
 

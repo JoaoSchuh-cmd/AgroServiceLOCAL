@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.a1agroservice.helper.SQLiteDataHelper;
 import com.example.a1agroservice.models.Anuncio;
@@ -20,7 +22,7 @@ public class AnuncioDao implements GenericDao<Anuncio> {
     private SQLiteDatabase db;
 
     //nome das colunas da tabela
-    private String[]colunas = {"ID", "ID_PESSOA", "ID_SERVICO", "ID_ENDERECO"};
+    private String[]colunas = {"ID", "ID_PESSOA", "ID_SERVICO", "ID_ENDERECO", "NOME_PROPRIETARIO", "CELULAR", "TIPO_PESSOA"};
 
     //Nome da Tabela
     private String tableName = "ANUNCIO";
@@ -48,10 +50,12 @@ public class AnuncioDao implements GenericDao<Anuncio> {
     @Override
     public boolean insert(Anuncio obj) {
         ContentValues values = new ContentValues();
-        values.put("ID", obj.getId());
         values.put("ID_PESSOA", obj.getId_pessoa());
         values.put("ID_SERVICO", obj.getId_servico());
         values.put("ID_ENDERECO", obj.getId_endereco());
+        values.put("NOME_PROPRIETARIO", obj.getNomeProprietario());
+        values.put("CELULAR", obj.getCelular());
+        values.put("TIPO_PESSOA", obj.getTipoPessoa());
 
         return db.insert(tableName, null, values) == 1 ? true : false;
     }
@@ -65,6 +69,9 @@ public class AnuncioDao implements GenericDao<Anuncio> {
         values.put("ID_PESSOA", newAnuncio.getId_pessoa());
         values.put("ID_SERVICO", newAnuncio.getId_servico());
         values.put("ID_ENDERECO", newAnuncio.getId_endereco());
+        values.put("NOME_PROPRIETARIO", newAnuncio.getNomeProprietario());
+        values.put("CELULAR", newAnuncio.getCelular());
+        values.put("TIPO_PESSOA", newAnuncio.getTipoPessoa());
 
         return db.update(tableName, values, "ID = ?", identificador) == 1 ? true : false;
     }
@@ -78,6 +85,9 @@ public class AnuncioDao implements GenericDao<Anuncio> {
         values.put("ID_PESSOA", obj.getId_pessoa());
         values.put("ID_SERVICO", obj.getId_servico());
         values.put("ID_ENDERECO", obj.getId_endereco());
+        values.put("NOME_PROPRIETARIO", obj.getNomeProprietario());
+        values.put("CELULAR", obj.getCelular());
+        values.put("TIPO_PESSOA", obj.getTipoPessoa());
 
         return db.delete(tableName, "ID = ?", identificador) == 1 ? true : false;
     }
@@ -96,6 +106,9 @@ public class AnuncioDao implements GenericDao<Anuncio> {
                 anuncio.setId_pessoa(cursor.getInt(1));
                 anuncio.setId_servico(cursor.getInt(2));
                 anuncio.setId_endereco(cursor.getInt(3));
+                anuncio.setNomeProprietario(cursor.getString(4));
+                anuncio.setCelular(cursor.getString(5));
+                anuncio.setTipoPessoa(cursor.getString(6));
 
                 listaAnuncio.add(anuncio);
             }while(cursor.moveToNext());
@@ -105,7 +118,7 @@ public class AnuncioDao implements GenericDao<Anuncio> {
     }
 
     @Override
-    public Anuncio getById(int id) {
+    public Anuncio getById(long id) {
         String[] identificadores = {String.valueOf(id)};
 
         Cursor cursor = db.query(tableName, colunas,
@@ -113,12 +126,21 @@ public class AnuncioDao implements GenericDao<Anuncio> {
                 "ID asc");
 
         Anuncio anuncio = new Anuncio();
-        if(cursor.getCount() > 0) {
-            anuncio.setId(cursor.getInt(0));
-            anuncio.setId_pessoa(cursor.getInt(1));
-            anuncio.setId_servico(cursor.getInt(2));
-            anuncio.setId_endereco(cursor.getInt(3));
-        }
+        if(cursor.moveToFirst()) {
+            try {
+                anuncio.setId(cursor.getInt(0));
+                anuncio.setId_pessoa(cursor.getInt(1));
+                anuncio.setId_servico(cursor.getInt(2));
+                anuncio.setId_endereco(cursor.getInt(3));
+                anuncio.setNomeProprietario(cursor.getString(4));
+                anuncio.setCelular(cursor.getString(5));
+                anuncio.setTipoPessoa(cursor.getString(6));
+            }catch (Exception E) {
+                Toast.makeText(context, "Erro ao buscar anúncio pelo Id!", Toast.LENGTH_SHORT).show();
+                Log.e("GetAdvertisementById", E.getMessage());
+            }
+        } else
+            anuncio = null;
 
         return anuncio;
     }

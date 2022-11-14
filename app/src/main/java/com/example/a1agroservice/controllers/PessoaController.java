@@ -16,14 +16,16 @@ public class PessoaController {
     }
 
     public static PessoaController getInstance(Context context) {
-        return controller == null ? new PessoaController(context) : controller;
+        if (controller == null)
+            controller = new PessoaController(context);
+        return controller;
     }
 
     public Pessoa getPessoaByUsername(String username) {
         return PessoaDao.getInstancia(context).getByUsername(username);
     }
 
-    public Pessoa getPessoaById(int id) {
+    public Pessoa getPessoaById(long id) {
         return PessoaDao.getInstancia(context).getById(id);
     }
 

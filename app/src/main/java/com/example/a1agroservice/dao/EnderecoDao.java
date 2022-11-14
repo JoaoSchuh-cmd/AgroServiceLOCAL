@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.a1agroservice.helper.SQLiteDataHelper;
 import com.example.a1agroservice.models.Endereco;
@@ -19,7 +21,7 @@ public class EnderecoDao implements GenericDao<Endereco> {
     private SQLiteDatabase db;
 
     //nome das colunas da tabela
-    private String[]colunas = {"ID", "CIDADE", "ESTADO", "CEP"};
+    private String[]colunas = {"ID", "CIDADE", "ESTADO"};
 
     //Nome da Tabela
     private String tableName = "ENDERECO";
@@ -30,7 +32,9 @@ public class EnderecoDao implements GenericDao<Endereco> {
     private static EnderecoDao instancia;
 
     public static EnderecoDao getInstancia(Context context){
-        return (instancia == null ? new EnderecoDao(context) : instancia);
+        if (instancia == null)
+            instancia = new EnderecoDao(context);
+        return instancia;
     }
 
     //Construtor
@@ -49,7 +53,6 @@ public class EnderecoDao implements GenericDao<Endereco> {
         ContentValues valores = new ContentValues();
         valores.put("CIDADE", obj.getCidade());
         valores.put("ESTADO", obj.getEstado());
-        valores.put("CEP", obj.getCep());
 
         return db.insert(tableName, null, valores) == 1 ? true : false;
     }
@@ -61,7 +64,6 @@ public class EnderecoDao implements GenericDao<Endereco> {
         ContentValues valores = new ContentValues();
         valores.put("CIDADE", newEndereco.getCidade());
         valores.put("ESTADO", newEndereco.getEstado());
-        valores.put("CEP", newEndereco.getCep());
 
         return db.update(tableName, valores,
                 "ID = ?", identificador) == 1 ? true : false;
@@ -74,7 +76,6 @@ public class EnderecoDao implements GenericDao<Endereco> {
         ContentValues valores = new ContentValues();
         valores.put("CIDADE", obj.getCidade());
         valores.put("ESTADO", obj.getEstado());
-        valores.put("CEP", obj.getCep());
 
         return db.delete(tableName, "ID = ?", identificador) == 1 ? true : false;
     }
@@ -93,7 +94,6 @@ public class EnderecoDao implements GenericDao<Endereco> {
                 endereco.setId(cursor.getInt(0));
                 endereco.setCidade(cursor.getString(1));
                 endereco.setEstado(cursor.getString(2));
-                endereco.setCep(cursor.getString(3));
 
                 listaEndereco.add(endereco);
             }while(cursor.moveToNext());
@@ -103,19 +103,48 @@ public class EnderecoDao implements GenericDao<Endereco> {
     }
 
     @Override
-    public Endereco getById(int id) {
+    public Endereco getById(long id) {
         String[] identificadores = {String.valueOf(id)};
 
         Cursor cursor = db.query(tableName, colunas,
-                "USUARIO = ?", identificadores, null, null,
+                "ID = ?", identificadores, null, null,
                 null);
 
         Endereco endereco = new Endereco();
-        if (cursor.getCount() > 0) {
-            endereco.setId(cursor.getInt(0));
-            endereco.setCidade(cursor.getString(1));
-            endereco.setEstado(cursor.getString(2));
-            endereco.setCep(cursor.getString(3));
+        if (cursor.moveToFirst()) {
+            try {
+                endereco.setId(cursor.getLong(0));
+                endereco.setCidade(cursor.getString(1));
+                endereco.setEstado(cursor.getString(2));
+            }catch (Exception E){
+                Toast.makeText(context, "Erro ao buscar enderço pelo Id!", Toast.LENGTH_SHORT).show();
+                Log.e("GetAddressById", E.getMessage());
+                endereco = null;
+            }
+        } else {
+            endereco = null;
+        }
+
+        return endereco;
+    }
+
+    public Endereco getLastEndereco() {
+        Endereco endereco = new Endereco();
+
+        Cursor cursor = db.query(tableName, colunas, null, null, null, null, "ID DESC");
+
+        if (cursor.moveToFirst()) {
+            try {
+                endereco.setId(cursor.getLong(0));
+                endereco.setCidade(cursor.getString(1));
+                endereco.setEstado(cursor.getString(2));
+            } catch (Exception E) {
+                Toast.makeText(context, "Erro ao pegar último endereço!", Toast.LENGTH_SHORT).show();
+                Log.e("GetLastEndereco", E.getMessage());
+            }
+
+        } else {
+            endereco = null;
         }
 
         return endereco;

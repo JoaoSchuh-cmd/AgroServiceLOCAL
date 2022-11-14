@@ -19,7 +19,7 @@ public class AnuncioController {
         return controller == null ? new AnuncioController(context) : controller;
     }
 
-    public Anuncio getAnuncioById(int id) {
+    public Anuncio getAnuncioById(long id) {
         return AnuncioDao.getInstancia(context).getById(id);
     }
 

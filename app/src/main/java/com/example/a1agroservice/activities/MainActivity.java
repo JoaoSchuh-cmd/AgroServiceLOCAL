@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void btEntrarOnClick(View view) {
         if (checkAllFields()) {
-            Login.getUsuarioLogado(edUsuario.getText().toString(), edSenha.getText().toString());
+            Login.getUsuarioLogado(edUsuario.getText().toString().trim(), edSenha.getText().toString());
 
             Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
             startActivity(homePage);
@@ -53,10 +53,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean checkAllFields() {
-        Pessoa pessoa = pessoaController.getPessoaByUsername(edUsuario.getText().toString());
+        Pessoa pessoa = pessoaController.getPessoaByUsername(edUsuario.getText().toString().trim());
         if (pessoa != null) {
             if (edSenha.getText().toString().equals(pessoa.getSenha())) {
-                Login.getUsuarioLogado(edUsuario.getText().toString(), edSenha.getText().toString());
+                Login.getUsuarioLogado(edUsuario.getText().toString().trim(), edSenha.getText().toString());
                 Toast.makeText(this, "Bem-vindo " + pessoa.getNome(), Toast.LENGTH_SHORT).show();
                 return true;
             } else {

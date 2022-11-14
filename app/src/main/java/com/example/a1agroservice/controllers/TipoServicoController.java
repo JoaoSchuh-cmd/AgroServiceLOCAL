@@ -19,7 +19,7 @@ public class TipoServicoController {
         return controller == null ? new TipoServicoController(context) : controller;
     }
 
-    public TipoServico getTipoServicoById(int id) {
+    public TipoServico getTipoServicoById(long id) {
         return TipoServicoDao.getInstancia(context).getById(id);
     }
 

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.a1agroservice.helper.SQLiteDataHelper;
 import com.example.a1agroservice.models.Pessoa;
@@ -30,7 +32,9 @@ public class PessoaDao implements GenericDao<Pessoa> {
     private static PessoaDao instancia;
 
     public static PessoaDao getInstancia(Context context){
-        return (instancia == null ? new PessoaDao(context) : instancia);
+        if (instancia == null)
+            instancia = new PessoaDao(context);
+        return instancia;
     }
 
     //Construtor
@@ -110,7 +114,7 @@ public class PessoaDao implements GenericDao<Pessoa> {
     }
 
     @Override
-    public Pessoa getById(int id) {
+    public Pessoa getById(long id) {
         String[] identificadores = {String.valueOf(id)};
 
         Cursor cursor = db.query(tableName, colunas,
@@ -118,13 +122,21 @@ public class PessoaDao implements GenericDao<Pessoa> {
                 null);
 
         Pessoa pessoa = new Pessoa();
-        if (cursor.getCount() > 0) {
-            pessoa.setId(cursor.getInt(0));
-            pessoa.setNome(cursor.getString(1));
-            pessoa.setCelular(cursor.getString(22));
-            pessoa.setCpf(cursor.getString(3));
-            pessoa.setUsuario(cursor.getString(4));
-            pessoa.setSenha(cursor.getString(5));
+        if (cursor.moveToFirst()) {
+            try {
+                pessoa.setId(cursor.getLong(0));
+                pessoa.setNome(cursor.getString(1));
+                pessoa.setCelular(cursor.getString(2));
+                pessoa.setCpf(cursor.getString(3));
+                pessoa.setUsuario(cursor.getString(4));
+                pessoa.setSenha(cursor.getString(5));
+            } catch (Exception E) {
+                Toast.makeText(context, "Erro ao buscar pessoa pelo Id", Toast.LENGTH_SHORT).show();
+                Log.e("GetPersonById", E.getMessage());
+            }
+
+        } else {
+            pessoa = null;
         }
 
         return pessoa;

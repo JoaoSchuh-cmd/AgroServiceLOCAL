@@ -6,26 +6,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.a1agroservice.R;
+import com.example.a1agroservice.controllers.AnuncioController;
 import com.example.a1agroservice.controllers.EnderecoController;
-import com.example.a1agroservice.controllers.PessoaController;
 import com.example.a1agroservice.controllers.ServicoController;
 import com.example.a1agroservice.controllers.TipoServicoController;
+import com.example.a1agroservice.fragments.AnunciosDetalhesFragment;
 import com.example.a1agroservice.models.Anuncio;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AnuncioAdapter extends BaseAdapter {
+    private TipoServicoController tipoServicoController;
+    private ServicoController servicoController;
+    private AnuncioController anuncioController;
     private ArrayList<Anuncio> listaAnuncio;
     private Context context;
+    private AppCompatActivity activity;
 
-    public AnuncioAdapter(ArrayList<Anuncio> listaAnuncio, Context context) {
+    public AnuncioAdapter(ArrayList<Anuncio> listaAnuncio, Context context, AppCompatActivity activity) {
         this.listaAnuncio = listaAnuncio;
         this.context = context;
+        this.activity = activity;
+        tipoServicoController = new TipoServicoController(context);
+        servicoController = new ServicoController(context);
+        anuncioController = new AnuncioController(context);
     }
 
     @Override
@@ -68,17 +78,19 @@ public class AnuncioAdapter extends BaseAdapter {
         tvDataFinal.setText(ServicoController.getInstance(context).getServicoById(anuncio.getId_servico()).getData_fim());
         tvCidade.setText(EnderecoController.getInstance(context).getEnderecoById(anuncio.getId_endereco()).getCidade());
         tvEstado.setText(EnderecoController.getInstance(context).getEnderecoById(anuncio.getId_endereco()).getEstado());
-        tvProprietario.setText(PessoaController.getInstance(context).getPessoaById(anuncio.getId_pessoa()).getNome());
+        tvProprietario.setText(anuncio.getNomeProprietario());
 
         CardView cvAnuncioItem = convertView.findViewById(R.id.cvAnuncioItem);
 
         cvAnuncioItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Clicou no anúncio!", Toast.LENGTH_SHORT).show();
+                AnunciosDetalhesFragment anunciosDetalhesFragment = new AnunciosDetalhesFragment(context, anuncio);
+                anunciosDetalhesFragment.show(activity.getSupportFragmentManager(), "Cadastro Anúncio");
             }
         });
 
         return convertView;
     }
+
 }

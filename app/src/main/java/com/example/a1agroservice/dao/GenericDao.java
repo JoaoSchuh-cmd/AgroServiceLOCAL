@@ -7,5 +7,5 @@ public interface GenericDao<Objeto> {
     boolean update(long oldObjId, Objeto obj);
     boolean delete(Objeto obj);
     ArrayList<Objeto> getAll();
-    Objeto getById(int id);
+    Objeto getById(long id);
 }

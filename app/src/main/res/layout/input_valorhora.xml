@@ -35,7 +35,9 @@
             android:hint="Digite um valor..."
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="16dp" />
+            android:textSize="16dp"
+            android:id="@+id/edValorHora"
+            android:inputType="number"/>
 
     </LinearLayout>
 

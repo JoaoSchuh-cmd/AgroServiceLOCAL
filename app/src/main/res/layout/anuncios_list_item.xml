@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_margin="5dp">
+    android:layout_margin="10dp">
 
    <androidx.cardview.widget.CardView
        android:layout_width="match_parent"
@@ -12,13 +12,16 @@
        android:id="@+id/cvAnuncioItem"
        app:cardCornerRadius="4dp"
        android:background="@color/white"
-       android:onClick="OnCardClick">
+       android:onClick="OnCardClick"
+       android:layout_marginBottom="5dp">
 
 
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:orientation="vertical">
+           android:orientation="vertical"
+           android:paddingHorizontal="10dp"
+           android:paddingVertical="5dp">
 
            <LinearLayout
                android:layout_width="match_parent"
