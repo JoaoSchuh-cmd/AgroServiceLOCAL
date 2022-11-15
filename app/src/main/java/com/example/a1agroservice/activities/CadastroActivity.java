@@ -28,7 +28,7 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         iniciaComponentes();
-        pessoaController = new PessoaController(this);
+        pessoaController = PessoaController.getInstance(this);
     }
 
     public void btVoltarOnClick(View view) {

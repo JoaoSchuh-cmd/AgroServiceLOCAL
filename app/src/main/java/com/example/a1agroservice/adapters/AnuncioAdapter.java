@@ -33,9 +33,9 @@ public class AnuncioAdapter extends BaseAdapter {
         this.listaAnuncio = listaAnuncio;
         this.context = context;
         this.activity = activity;
-        tipoServicoController = new TipoServicoController(context);
-        servicoController = new ServicoController(context);
-        anuncioController = new AnuncioController(context);
+        tipoServicoController = TipoServicoController.getInstance(context);
+        servicoController = ServicoController.getInstance(context);
+        anuncioController = AnuncioController.getInstance(context);
     }
 
     @Override

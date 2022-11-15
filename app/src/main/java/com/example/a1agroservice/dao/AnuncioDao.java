@@ -33,7 +33,9 @@ public class AnuncioDao implements GenericDao<Anuncio> {
     private static AnuncioDao instancia;
 
     public static AnuncioDao getInstancia(Context context){
-        return (instancia == null ? new AnuncioDao(context) : instancia);
+        if (instancia == null)
+            instancia = new AnuncioDao(context);
+        return instancia;
     }
 
     //Construtor

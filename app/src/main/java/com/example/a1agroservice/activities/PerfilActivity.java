@@ -35,7 +35,7 @@ public class PerfilActivity extends AppCompatActivity {
         edUsuario = findViewById(R.id.edUsuario);
         edSenha = findViewById(R.id.edSenha);
 
-        pessoaController = new PessoaController(this);
+        pessoaController = PessoaController.getInstance(this);
 
         carregaInformacoesUsuario();
     }

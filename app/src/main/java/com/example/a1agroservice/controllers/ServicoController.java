@@ -16,7 +16,9 @@ public class ServicoController {
     }
 
     public static ServicoController getInstance(Context context) {
-        return controller == null ? new ServicoController(context) : controller;
+        if (controller == null)
+            controller = new ServicoController(context);
+        return controller;
     }
 
     public Servico getServicoById(long id) {

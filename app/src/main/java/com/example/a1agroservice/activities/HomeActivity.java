@@ -46,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
         lvListaAnuncios = findViewById(R.id.lvLista);
         tvListaVaziaMsg = findViewById(R.id.tvListaVaziaMsg);
 
-        anuncioController = new AnuncioController(this);
+        anuncioController = AnuncioController.getInstance(this);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

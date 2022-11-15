@@ -16,7 +16,9 @@ public class TipoServicoController {
     }
 
     public static TipoServicoController getInstance(Context context) {
-        return controller == null ? new TipoServicoController(context) : controller;
+        if (controller == null)
+            controller = new TipoServicoController(context);
+        return controller;
     }
 
     public TipoServico getTipoServicoById(long id) {

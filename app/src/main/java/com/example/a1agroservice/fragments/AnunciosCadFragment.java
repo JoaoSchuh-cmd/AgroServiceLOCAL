@@ -74,11 +74,11 @@ public class AnunciosCadFragment extends DialogFragment {
 
     public AnunciosCadFragment(Context context) {
         this.context = context;
-        anuncioController = new AnuncioController(context);
-        tipoServicoController = new TipoServicoController(context);
-        pessoaController = new PessoaController(context);
-        enderecoController = new EnderecoController(context);
-        servicoController = new ServicoController(context);
+        anuncioController = AnuncioController.getInstance(context);
+        tipoServicoController = TipoServicoController.getInstance(context);
+        pessoaController = PessoaController.getInstance(context);
+        enderecoController = EnderecoController.getInstance(context);
+        servicoController = ServicoController.getInstance(context);
     }
 
     @Nullable

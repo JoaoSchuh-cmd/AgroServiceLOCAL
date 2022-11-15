@@ -16,7 +16,9 @@ public class AnuncioController {
     }
 
     public static AnuncioController getInstance(Context context) {
-        return controller == null ? new AnuncioController(context) : controller;
+        if (controller == null)
+            controller = new AnuncioController(context);
+        return controller;
     }
 
     public Anuncio getAnuncioById(long id) {

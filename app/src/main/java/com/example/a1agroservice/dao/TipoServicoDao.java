@@ -30,7 +30,9 @@ public class TipoServicoDao implements GenericDao<TipoServico> {
     private static TipoServicoDao instancia;
 
     public static TipoServicoDao getInstancia(Context context){
-        return (instancia == null ? new TipoServicoDao(context) : instancia);
+        if (instancia == null)
+            instancia = new TipoServicoDao(context);
+        return instancia;
     }
 
     //Construtor
