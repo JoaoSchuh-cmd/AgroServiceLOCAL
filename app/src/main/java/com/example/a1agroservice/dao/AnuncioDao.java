@@ -146,4 +146,28 @@ public class AnuncioDao implements GenericDao<Anuncio> {
 
         return anuncio;
     }
+
+    public ArrayList<Anuncio> getByUserId(long id) {
+        String[] identificadores = {String.valueOf(id)};
+        ArrayList<Anuncio> listaAnuncio = new ArrayList<>();
+
+        Cursor cursor = db.query(tableName, colunas, "ID_PESSOA = ?", identificadores, null, null, "ID asc");
+
+        if(cursor.moveToFirst()){
+            do{
+                Anuncio anuncio = new Anuncio();
+                anuncio.setId(cursor.getInt(0));
+                anuncio.setId_pessoa(cursor.getInt(1));
+                anuncio.setId_servico(cursor.getInt(2));
+                anuncio.setId_endereco(cursor.getInt(3));
+                anuncio.setNomeProprietario(cursor.getString(4));
+                anuncio.setCelular(cursor.getString(5));
+                anuncio.setTipoPessoa(cursor.getString(6));
+
+                listaAnuncio.add(anuncio);
+            } while(cursor.moveToNext());
+        }
+
+        return listaAnuncio;
+    }
 }

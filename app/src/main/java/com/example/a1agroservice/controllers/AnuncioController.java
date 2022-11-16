@@ -25,12 +25,18 @@ public class AnuncioController {
         return AnuncioDao.getInstancia(context).getById(id);
     }
 
+    public ArrayList<Anuncio> getAnunciosByUserId(long id) { return AnuncioDao.getInstancia(context).getByUserId(id); }
+
     public ArrayList<Anuncio> getAnuncios() {
         return AnuncioDao.getInstancia(context).getAll();
     }
 
     public boolean saveAnuncio(Anuncio anuncio) {
         return AnuncioDao.getInstancia(context).insert(anuncio);
+    }
+
+    public boolean updateAnuncio(Anuncio oldA, Anuncio newA) {
+        return AnuncioDao.getInstancia(context).update(oldA.getId(), newA);
     }
 
     public boolean deleteAnuncio(Anuncio anuncio) {

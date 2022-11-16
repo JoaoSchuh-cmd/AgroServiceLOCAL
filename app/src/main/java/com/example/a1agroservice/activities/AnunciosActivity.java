@@ -1,33 +1,30 @@
 package com.example.a1agroservice.activities;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import com.example.a1agroservice.adapters.AnuncioAdapter;
 import com.example.a1agroservice.R;
+import com.example.a1agroservice.adapters.AnuncioAdapter;
 import com.example.a1agroservice.controllers.AnuncioController;
+import com.example.a1agroservice.controllers.PessoaController;
 import com.example.a1agroservice.fragments.AnunciosCadFragment;
-import com.example.a1agroservice.fragments.FiltrosFragment;
-import com.example.a1agroservice.fragments.MenuPerfilFragment;
 import com.example.a1agroservice.models.Anuncio;
+import com.example.a1agroservice.singleton.Login;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity {
-    private ImageButton btMenuPerfil;
+public class AnunciosActivity extends AppCompatActivity {
+
+    private ImageButton btHome;
     private ImageButton btMenuPesquisa;
 
     private ArrayList<Anuncio> anuncios;
@@ -39,18 +36,18 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_anuncios);
 
-        swipeRefreshLayout = findViewById(R.id.swipeLayout);
-
-        btMenuPerfil = findViewById(R.id.btMenuPerfil);
+        btHome = findViewById(R.id.btHome);
         btMenuPesquisa = findViewById(R.id.btMenuPesquisa);
+
         lvListaAnuncios = findViewById(R.id.lvLista);
         tvListaVaziaMsg = findViewById(R.id.tvListaVaziaMsg);
 
         anuncioController = AnuncioController.getInstance(this);
+
+        swipeRefreshLayout = findViewById(R.id.swipeLayout);
 
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -60,24 +57,17 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        btMenuPerfil.setOnClickListener(new View.OnClickListener() {
+        btHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                abrirMenuPerfil();
-            }
-        });
-
-        btMenuPesquisa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                abrirMenuPesquisa();
+                Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(homePage);
+                finish();
             }
         });
 
         carregaAnuncios();
-
     }
-
 
     private void carregaAnuncios() {
         atualizaListaAnuncios();
@@ -97,21 +87,12 @@ public class HomeActivity extends AppCompatActivity {
 
     private void atualizaListaAnuncios() {
         anuncios = new ArrayList<>();
-        anuncios = anuncioController.getAnuncios();
+        anuncios = anuncioController.getAnunciosByUserId(
+                PessoaController.getInstance(this).getPessoaByUsername(Login.getUsuarioLogado().getUsuario()).getId());
         AnuncioAdapter adapter = new AnuncioAdapter(
-                anuncios, this, this, "HOME");
+                anuncios, this, this, "SEUS_ANUNCIOS");
 
         lvListaAnuncios.setAdapter(adapter);
-    }
-
-    public void abrirMenuPerfil(){
-        MenuPerfilFragment menuPerfilFragment = new MenuPerfilFragment(this);
-        menuPerfilFragment.show(getSupportFragmentManager(), "MenuPerfil");
-    }
-
-    public void abrirMenuPesquisa(){
-        FiltrosFragment filtrosFragment = new FiltrosFragment(this);
-        filtrosFragment.show(getSupportFragmentManager(), "Filtros");
     }
 
     public void btCriarAnuncioOnClick(View view) {
@@ -119,7 +100,7 @@ public class HomeActivity extends AppCompatActivity {
             AnunciosCadFragment anunciosCadFragment = new AnunciosCadFragment(this);
             anunciosCadFragment.show(getSupportFragmentManager(), "Cadastro Anúncio");
         } catch (Exception E) {
-            Toast.makeText(this, "Erro ao abrir tela de cadastro de anúncios!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Erro ao abrir tela de cadastro de anúncios no perfil!", Toast.LENGTH_SHORT).show();
             Log.e("OpenFragment", E.getMessage());
         }
     }

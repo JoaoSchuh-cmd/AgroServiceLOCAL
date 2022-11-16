@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.a1agroservice.R;
+import com.example.a1agroservice.activities.AnunciosActivity;
 import com.example.a1agroservice.activities.PerfilActivity;
 
 public class MenuPerfilFragment extends DialogFragment {
@@ -39,6 +40,14 @@ public class MenuPerfilFragment extends DialogFragment {
             public void onClick(View v) {
                 Intent perfilPage = new Intent(context, PerfilActivity.class);
                 startActivity(perfilPage);
+            }
+        });
+
+        tvSeusAnuncios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent anunciosPerfil = new Intent(context, AnunciosActivity.class);
+                startActivity(anunciosPerfil);
             }
         });
 

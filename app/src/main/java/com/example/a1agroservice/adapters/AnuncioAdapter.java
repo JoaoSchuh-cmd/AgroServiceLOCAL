@@ -16,6 +16,7 @@ import com.example.a1agroservice.controllers.EnderecoController;
 import com.example.a1agroservice.controllers.ServicoController;
 import com.example.a1agroservice.controllers.TipoServicoController;
 import com.example.a1agroservice.fragments.AnunciosDetalhesFragment;
+import com.example.a1agroservice.fragments.SeusAnunciosDetalhesFragment;
 import com.example.a1agroservice.models.Anuncio;
 
 import java.util.ArrayList;
@@ -28,11 +29,13 @@ public class AnuncioAdapter extends BaseAdapter {
     private ArrayList<Anuncio> listaAnuncio;
     private Context context;
     private AppCompatActivity activity;
+    private String tela;
 
-    public AnuncioAdapter(ArrayList<Anuncio> listaAnuncio, Context context, AppCompatActivity activity) {
+    public AnuncioAdapter(ArrayList<Anuncio> listaAnuncio, Context context, AppCompatActivity activity, String tela) {
         this.listaAnuncio = listaAnuncio;
         this.context = context;
         this.activity = activity;
+        this.tela = tela;
         tipoServicoController = TipoServicoController.getInstance(context);
         servicoController = ServicoController.getInstance(context);
         anuncioController = AnuncioController.getInstance(context);
@@ -73,6 +76,7 @@ public class AnuncioAdapter extends BaseAdapter {
                                 ServicoController.getInstance(context)
                                         .getServicoById(anuncio.getId_servico()) .getId_tipo_servico()).getNome()
         );
+
         tvValorHora.setText(String.valueOf(ServicoController.getInstance(context).getServicoById(anuncio.getId_servico()).getValorhora()));
         tvDataInicial.setText(ServicoController.getInstance(context).getServicoById(anuncio.getId_servico()).getData_inicio());
         tvDataFinal.setText(ServicoController.getInstance(context).getServicoById(anuncio.getId_servico()).getData_fim());
@@ -85,8 +89,13 @@ public class AnuncioAdapter extends BaseAdapter {
         cvAnuncioItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnunciosDetalhesFragment anunciosDetalhesFragment = new AnunciosDetalhesFragment(context, anuncio);
-                anunciosDetalhesFragment.show(activity.getSupportFragmentManager(), "Cadastro Anúncio");
+                if (tela.equals("HOME")) {
+                    AnunciosDetalhesFragment anunciosDetalhesFragment = new AnunciosDetalhesFragment(context, anuncio);
+                    anunciosDetalhesFragment.show(activity.getSupportFragmentManager(), "Detalhes Anúncio aba Home");
+                } else {
+                    SeusAnunciosDetalhesFragment seusAnunciosDetalhesFragment = new SeusAnunciosDetalhesFragment(context, anuncio);
+                    seusAnunciosDetalhesFragment.show(activity.getSupportFragmentManager(), "Detalhes Anúncio aba Seus Anúncios");
+                }
             }
         });
 
