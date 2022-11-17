@@ -85,12 +85,12 @@ public class CadastroActivity extends AppCompatActivity {
             edUsuario.setError("Usuário informado já foi cadastrado!");
             result = false;
         }
-        if (pessoaController.cpfAlreadyRegistered(edCpf.getUnMasked())) {
-            edCpf.setError("Cpf informado já foi cadastrado!");
+        if (pessoaController.celularAlreadyRegistered(edWhatsapp.getUnMasked())) {
+            edWhatsapp.setError("Celular informado já foi cadastrado!");
             result = false;
         }
-        if (pessoaController.celularAlreadyRegistered(edWhatsapp.getUnMasked())) {
-            edCpf.setError("Celular informado já foi cadastrado!");
+        if (pessoaController.cpfAlreadyRegistered(edCpf.getUnMasked())) {
+            edCpf.setError("Cpf informado já foi cadastrado!");
             result = false;
         }
 

@@ -191,7 +191,8 @@ public class AnunciosCadFragment extends DialogFragment {
 
             anuncioController.saveAnuncio(anuncio);
 
-            getActivity().getSupportFragmentManager().popBackStack();
+            Toast.makeText(context, "Anúncio Cadastrado!", Toast.LENGTH_SHORT).show();
+
         } catch (Exception E) {
             Toast.makeText(context, "Erro ao salvar anúncio!", Toast.LENGTH_SHORT).show();
             Log.e("SaveAdvertisement", E.getMessage());
