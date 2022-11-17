@@ -21,8 +21,8 @@
         android:layout_marginBottom="10dp"
         android:id="@+id/spTipoServico"
         android:hint="Selecione..."
-        android:textColorHint="@color/white"
         android:textSize="26dp"
-        app:spinner_popup_animation="bounce"/>
+        app:spinner_popup_animation="bounce"
+        android:backgroundTint="@color/white" />
 
 </LinearLayout>
