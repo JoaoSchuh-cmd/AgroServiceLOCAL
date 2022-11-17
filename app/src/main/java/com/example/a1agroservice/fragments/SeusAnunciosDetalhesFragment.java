@@ -2,6 +2,7 @@ package com.example.a1agroservice.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +16,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.a1agroservice.R;
+import com.example.a1agroservice.activities.MainActivity;
 import com.example.a1agroservice.adapters.TipoServicoAdapter;
 import com.example.a1agroservice.controllers.AnuncioController;
 import com.example.a1agroservice.controllers.EnderecoController;
@@ -25,8 +28,10 @@ import com.example.a1agroservice.controllers.ServicoController;
 import com.example.a1agroservice.controllers.TipoServicoController;
 import com.example.a1agroservice.models.Anuncio;
 import com.example.a1agroservice.models.Endereco;
+import com.example.a1agroservice.models.Pessoa;
 import com.example.a1agroservice.models.Servico;
 import com.example.a1agroservice.models.TipoServico;
+import com.example.a1agroservice.singleton.Login;
 
 import java.util.ArrayList;
 
@@ -142,9 +147,24 @@ public class SeusAnunciosDetalhesFragment extends DialogFragment {
                 @Override
                 public void onClick(View v) {
                     try {
-                        anuncioController.deleteAnuncio(anuncio);
-                        Toast.makeText(context, "Anúncio Exclúido!", Toast.LENGTH_SHORT).show();
-                        onCancel(getDialog());
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+                        alertDialog.setMessage("Tem certeza que deseja excluir?")
+                                .setNegativeButton("Sim", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        anuncioController.deleteAnuncio(anuncio);
+                                        Toast.makeText(context, "Anúncio Exclúido!", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .setPositiveButton("Não", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .setPositiveButtonIcon(context.getDrawable(R.drawable.ic_cancel))
+                                .setNegativeButtonIcon(context.getDrawable(R.drawable.ic_check))
+                                .show();
                     } catch (Exception E) {
                         Toast.makeText(context, "Erro ao excluir anúncio!", Toast.LENGTH_SHORT).show();
                         Log.e("OnDeleteAdvertisement", E.getMessage());
