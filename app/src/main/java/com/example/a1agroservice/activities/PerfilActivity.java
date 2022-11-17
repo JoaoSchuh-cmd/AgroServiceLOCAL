@@ -1,7 +1,9 @@
 package com.example.a1agroservice.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -107,12 +109,28 @@ public class PerfilActivity extends AppCompatActivity {
 
     public void btRemoverClick(View view) {
         try {
-            Pessoa pessoa = pessoaController.getPessoaByUsername(Login.getUsuarioLogado().getUsuario());
-            pessoaController.deletePessoa(pessoa);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setMessage("Tem certeza que deseja excluir?")
+                    .setNegativeButton("Sim", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Pessoa pessoa = pessoaController.getPessoaByUsername(Login.getUsuarioLogado().getUsuario());
+                            pessoaController.deletePessoa(pessoa);
 
-            Intent loginPage = new Intent(this, MainActivity.class);
-            startActivity(loginPage);
-            finish();
+                            Intent loginPage = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(loginPage);
+                            finish();
+                        }
+                    })
+                    .setPositiveButton("Não", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setPositiveButtonIcon(getDrawable(R.drawable.ic_cancel))
+                    .setNegativeButtonIcon(getDrawable(R.drawable.ic_check))
+                    .show();
         } catch (Exception E) {
             Toast.makeText(this, "Erro ao excluir usuário!", Toast.LENGTH_SHORT).show();
             Log.e("DeleteUser:", E.getMessage());
