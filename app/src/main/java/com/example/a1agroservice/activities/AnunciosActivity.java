@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class AnunciosActivity extends AppCompatActivity {
 
     private ImageButton btHome;
-    private ImageButton btMenuPesquisa;
+    private ImageButton btPerfil;
 
     private ArrayList<Anuncio> anuncios;
     private ListView lvListaAnuncios;
@@ -40,7 +40,7 @@ public class AnunciosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_anuncios);
 
         btHome = findViewById(R.id.btHome);
-        btMenuPesquisa = findViewById(R.id.btMenuPesquisa);
+        btPerfil = findViewById(R.id.btPerfil);
 
         lvListaAnuncios = findViewById(R.id.lvLista);
         tvListaVaziaMsg = findViewById(R.id.tvListaVaziaMsg);
@@ -62,6 +62,15 @@ public class AnunciosActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
                 startActivity(homePage);
+                finish();
+            }
+        });
+
+        btPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent perfilPage = new Intent(getApplicationContext(), PerfilActivity.class);
+                startActivity(perfilPage);
                 finish();
             }
         });

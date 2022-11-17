@@ -49,8 +49,8 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_baseline_search_24"
-            android:id="@+id/btMenuPesquisa"
+            android:background="@drawable/ic_person"
+            android:id="@+id/btPerfil"
             android:layout_margin="10dp"
             android:layout_gravity="center"/>
 
