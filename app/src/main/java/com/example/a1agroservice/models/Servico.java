@@ -1,20 +1,18 @@
 package com.example.a1agroservice.models;
 
-import java.util.Date;
-
 public class Servico {
 
-    private int id;
-    private int id_tipo_servico;
+    private long id;
+    private long id_tipo_servico;
     private String descricao;
-    private Date data_inicio;
-    private Date data_fim;
-    private Number valorhora;
+    private String data_inicio;
+    private String data_fim;
+    private double valorhora;
 
     public Servico() {
     }
 
-    public Servico(int id, int id_tipo_servico, String descricao, Date data_inicio, Date data_fim, Number valorhora) {
+    public Servico(long id, long id_tipo_servico, String descricao, String data_inicio, String data_fim, double valorhora) {
         this.id = id;
         this.id_tipo_servico = id_tipo_servico;
         this.descricao = descricao;
@@ -23,19 +21,19 @@ public class Servico {
         this.valorhora = valorhora;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getId_tipo_servico() {
+    public long getId_tipo_servico() {
         return id_tipo_servico;
     }
 
-    public void setId_tipo_servico(int id_tipo_servico) {
+    public void setId_tipo_servico(long id_tipo_servico) {
         this.id_tipo_servico = id_tipo_servico;
     }
 
@@ -47,27 +45,27 @@ public class Servico {
         this.descricao = descricao;
     }
 
-    public Date getData_inicio() {
+    public String getData_inicio() {
         return data_inicio;
     }
 
-    public void setData_inicio(Date data_inicio) {
+    public void setData_inicio(String data_inicio) {
         this.data_inicio = data_inicio;
     }
 
-    public Date getData_fim() {
+    public String getData_fim() {
         return data_fim;
     }
 
-    public void setData_fim(Date data_fim) {
+    public void setData_fim(String data_fim) {
         this.data_fim = data_fim;
     }
 
-    public Number getValorhora() {
+    public double getValorhora() {
         return valorhora;
     }
 
-    public void setValorhora(Number valorhora) {
+    public void setValorhora(double valorhora) {
         this.valorhora = valorhora;
     }
 

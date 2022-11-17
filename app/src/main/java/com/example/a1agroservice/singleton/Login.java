@@ -11,6 +11,34 @@ public class Login {
     }
 
     public static Login getUsuarioLogado(String usuario, String senha) {
-        return usuarioLogado == null ? new Login(usuario, senha) : usuarioLogado;
+        if (usuarioLogado == null) {
+            usuarioLogado = new Login(usuario, senha);
+        }
+        return usuarioLogado;
     }
+
+    public static Login getUsuarioLogado() {
+        return usuarioLogado;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public static void limpaUsuarioLogado() {
+        usuarioLogado = null;
+    }
+
 }

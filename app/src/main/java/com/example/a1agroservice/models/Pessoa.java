@@ -2,7 +2,10 @@ package com.example.a1agroservice.models;
 
 public class Pessoa {
 
-    private int id;
+
+    private long id;
+
+
     private String nome;
     private String cpf;
     private String usuario;
@@ -12,7 +15,7 @@ public class Pessoa {
     public Pessoa() {
     }
 
-    public Pessoa(int id, String nome, String cpf, String usuario, String senha, String celular) {
+    public Pessoa(long id, String nome, String cpf, String usuario, String senha, String celular) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -21,11 +24,11 @@ public class Pessoa {
         this.celular = celular;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

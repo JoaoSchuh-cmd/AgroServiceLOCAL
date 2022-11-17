@@ -1,26 +1,24 @@
 package com.example.a1agroservice.models;
 
 public class Endereco {
-    private int id;
+    private long id;
     private String cidade;
     private String estado;
-    private String cep;
 
     public Endereco() {
     }
 
-    public Endereco(int id, String cidade, String estado, String cep) {
+    public Endereco(long id, String cidade, String estado) {
         this.id = id;
         this.cidade = cidade;
         this.estado = estado;
-        this.cep = cep;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -40,21 +38,12 @@ public class Endereco {
         this.estado = estado;
     }
 
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
     @Override
     public String toString() {
         return "Endereco{" +
                 "id=" + id +
                 ", cidade='" + cidade + '\'' +
                 ", estado='" + estado + '\'' +
-                ", cep='" + cep + '\'' +
                 '}';
     }
 }

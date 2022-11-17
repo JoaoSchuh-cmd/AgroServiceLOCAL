@@ -1,27 +1,39 @@
 package com.example.a1agroservice.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
+import  android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.a1agroservice.R;
 import com.example.a1agroservice.controllers.PessoaController;
+import com.example.a1agroservice.models.Pessoa;
+import com.example.a1agroservice.singleton.Login;
 
 public class MainActivity extends AppCompatActivity {
     private EditText edUsuario;
     private EditText edSenha;
     private PessoaController pessoaController;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        pessoaController = new PessoaController(this);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        pessoaController = PessoaController.getInstance(this);
 
         importarComponentes();
     }
@@ -31,33 +43,31 @@ public class MainActivity extends AppCompatActivity {
         startActivity(cadastroPage);
     }
 
-    public void btEntrarOnClick(View view) throws InterruptedException {
+    public void btEntrarOnClick(View view) {
+        Login.limpaUsuarioLogado();
+        if (checkAllFields()) {
+            Login.getUsuarioLogado(edUsuario.getText().toString().trim(), edSenha.getText().toString());
 
-        if (edUsuario.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Informe um usuário!", Toast.LENGTH_SHORT).show();
-            return;
+            Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
+            startActivity(homePage);
         }
+    }
 
-        if (edSenha.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Informe a senha!", Toast.LENGTH_SHORT).show();
-            return;
+    private boolean checkAllFields() {
+        Pessoa pessoa = pessoaController.getPessoaByUsername(edUsuario.getText().toString().trim());
+        if (pessoa != null) {
+            if (edSenha.getText().toString().equals(pessoa.getSenha())) {
+                Login.getUsuarioLogado(edUsuario.getText().toString().trim(), edSenha.getText().toString());
+                Toast.makeText(this, "Bem-vindo " + pessoa.getNome(), Toast.LENGTH_SHORT).show();
+                return true;
+            } else {
+                edSenha.setError("Senha incorreta!");
+                return false;
+            }
+        } else {
+            Toast.makeText(this, "Usuário não encontrado", Toast.LENGTH_SHORT).show();
+            return false;
         }
-
-        try {
-            if (pessoaController.getByUsuario(edUsuario.getText().toString().trim()) != null)
-                if (pessoaController.validaSenha(edUsuario.getText().toString(), edSenha.getText().toString())) {
-                    Toast.makeText(this, "Senha incorreta!", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    Toast.makeText(this, "Bem-Vindo " + pessoaController.getByUsuario(edUsuario.getText().toString()).getNome(), Toast.LENGTH_SHORT).show();
-                }
-        } catch (Exception E) {
-            Toast.makeText(this, "Falha na consulta!", Toast.LENGTH_SHORT).show();
-        }
-
-        //TODO abrir Home Page
-//        Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
-//        startActivity(homePage);
     }
 
     private void importarComponentes() {

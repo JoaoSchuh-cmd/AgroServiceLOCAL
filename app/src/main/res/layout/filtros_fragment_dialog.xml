@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:layout_gravity="center_horizontal">
+
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@color/green"
+            android:orientation="vertical"
+            android:padding="10dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="Selecione os filtros:"
+                android:textColor="@color/white"
+                android:textSize="28dp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_weight="1.5"
+                    android:layout_height="wrap_content"
+                    android:text="Funcionário"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/white"
+                    android:textSize="16dp"
+                    android:id="@+id/rbFuncionario"/>
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_weight="1.5"
+                    android:layout_height="wrap_content"
+                    android:text="Proprietario"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/white"
+                    android:textSize="16dp"
+                    android:id="@+id/rbProprietario"/>
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Todos"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/white"
+                    android:textSize="16dp"
+                    android:id="@+id/rbTodos"/>
+
+            </RadioGroup>
+
+            <include android:id="@+id/layoutTipoServico"
+                layout="@layout/input_tiposervico"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Valor/Hr"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="19dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Min."
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="15dp"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/white"
+                        android:textSize="16dp"
+                        android:id="@+id/edValorHrMin"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Máx."
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:textSize="15dp"/>
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:backgroundTint="@color/white"
+                        android:textSize="16dp"
+                        android:id="@+id/edValorHrMax"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <include android:id="@+id/layoutPeriodo"
+                layout="@layout/input_periodo"/>
+
+            <include android:id="@+id/layoutEndereco"
+                layout="@layout/input_endereco"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_width="180dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/btAplicar"
+                    android:text="Aplicar"
+                    android:textColor="@color/green"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:backgroundTint="@color/white"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

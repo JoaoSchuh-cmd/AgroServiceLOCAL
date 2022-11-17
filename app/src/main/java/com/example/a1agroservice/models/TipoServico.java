@@ -2,22 +2,22 @@ package com.example.a1agroservice.models;
 
 public class TipoServico {
 
-    private int id;
+    private long id;
     private String nome;
 
     public TipoServico() {
     }
 
-    public TipoServico(int id, String nome) {
+    public TipoServico(long id, String nome) {
         this.id = id;
         this.nome = nome;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -1,23 +1,23 @@
 package com.example.a1agroservice.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.a1agroservice.R;
 import com.example.a1agroservice.controllers.PessoaController;
+import com.example.a1agroservice.funcoesvalidacao.FuncoesPadrao;
 import com.example.a1agroservice.models.Pessoa;
 import com.example.a1agroservice.singleton.Login;
 
 public class CadastroActivity extends AppCompatActivity {
     private EditText edNome;
-    private EditText edWhatsapp;
-    private EditText edCpf;
+    private com.santalu.maskara.widget.MaskEditText edWhatsapp;
+    private com.santalu.maskara.widget.MaskEditText edCpf;
     private EditText edUsuario;
     private EditText edSenha;
     private PessoaController pessoaController;
@@ -28,52 +28,104 @@ public class CadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
 
         iniciaComponentes();
-        pessoaController = new PessoaController(this);
+        pessoaController = PessoaController.getInstance(this);
     }
 
     public void btVoltarOnClick(View view) {
-        abrirLoginPage();
+        finish();
     }
 
-    public void btSalvarOnCick(View view) {
+    public void btSalvarOnClick(View view) {
+        if (!validaCampos())
+            return;
+
+        if (FuncoesPadrao.validaCPF(edCpf.getUnMasked()) == false) {
+            edCpf.setError("CPF INVÁLIDO");
+            return;
+        }
+
         Pessoa pessoa = new Pessoa();
-        pessoa.setId(PessoaController.getInstance(this).retornaProximoId());
         pessoa.setNome(edNome.getText().toString());
-        pessoa.setCpf(edCpf.getText().toString());
-        pessoa.setUsuario(edUsuario.getText().toString());
+        pessoa.setCpf(edCpf.getUnMasked());
+        pessoa.setUsuario(edUsuario.getText().toString().trim());
         pessoa.setSenha(edSenha.getText().toString());
-        pessoa.setCelular(edWhatsapp.getText().toString());
+        pessoa.setCelular(edWhatsapp.getUnMasked());
 
-        pessoaController.insert(this, pessoa);
-
-//        if (pessoaController.getByUsuario(edUsuario.getText().toString()) != null) {
-//            limpaCampos(); // TODO Quando tiver a HomePage, pode excluir isso
-////            abrirHomePage();
-//        } else {
-            limpaCampos();
-            abrirLoginPage();
-//        };
+        pessoaController.savePessoa(pessoa);
+        limpaCampos();
+        Login.getUsuarioLogado(pessoa.getUsuario(), pessoa.getSenha());
+        abrirHomePage();
+        Toast.makeText(this, "Bem-vindo " + pessoa.getNome(), Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     public void abrirLoginPage() {
-        Login.getUsuarioLogado(edUsuario.getText().toString(), edSenha.getText().toString());
-
         Intent loginPage = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(loginPage);
     }
 
     public void abrirHomePage() {
-//        Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
-//        startActivity(homePage);
+        Login.getUsuarioLogado(edUsuario.getText().toString(), edSenha.getText().toString());
+
+        Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
+        startActivity(homePage);
     }
 
-    //TODO Acho q não vai precisar desse pq já fiz as validações na API mas tem q ver como trabalhar com as respostas dela;
-//    private void validaCamposVazios() {
-//        if (edNome.getText().toString().isEmpty()) {
-//            Toast.makeText(this, "Campo nome é obrigatório", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//    }
+    private boolean validaCampos() {
+        if (!validaCamposVazios())
+            return false;
+        if (!validaInformacoesCampos())
+            return false;
+        return true;
+    }
+
+    private boolean validaInformacoesCampos() {
+        boolean result = true;
+
+        if (pessoaController.getPessoaByUsername(edUsuario.getText().toString()) != null) {
+            edUsuario.setError("Usuário informado já foi cadastrado!");
+            result = false;
+        }
+        if (pessoaController.celularAlreadyRegistered(edWhatsapp.getUnMasked())) {
+            edWhatsapp.setError("Celular informado já foi cadastrado!");
+            result = false;
+        }
+        if (pessoaController.cpfAlreadyRegistered(edCpf.getUnMasked())) {
+            edCpf.setError("Cpf informado já foi cadastrado!");
+            result = false;
+        }
+
+        return result;
+    }
+
+    private boolean validaCamposVazios() {
+        boolean result = true;
+        String mensagem = "Campo obrigatório!";
+
+        if (edNome.getText().toString().isEmpty()) {
+            edNome.setError(mensagem);
+            result = false;
+        }
+        if (edCpf.getText().toString().isEmpty()) {
+            edCpf.setError(mensagem);
+            result = false;
+        }
+        if (edWhatsapp.getText().toString().isEmpty()) {
+            edWhatsapp.setText(mensagem);
+            result = false;
+        }
+        if (edUsuario.getText().toString().isEmpty()) {
+            edUsuario.setError(mensagem);
+            result = false;
+        }
+        if (edSenha.getText().toString().isEmpty()) {
+            edSenha.setError(mensagem);
+            result = false;
+        }
+
+        return result;
+    }
+
     private void iniciaComponentes() {
         edNome = findViewById(R.id.edNome);
         edWhatsapp = findViewById(R.id.edWhatsapp);
