@@ -163,4 +163,20 @@ public class PessoaDao implements GenericDao<Pessoa> {
 
         return pessoa;
     }
+
+    public boolean getCpf(String cpf) {
+        String[] identificadores = {cpf};
+
+        Cursor cursor = db.query(tableName, colunas, "CPF = ?", identificadores, null, null, null);
+
+        return cursor.moveToFirst();
+    }
+
+    public boolean getCelular(String celular) {
+        String[] identificadores = {celular};
+
+        Cursor cursor = db.query(tableName, colunas, "CELULAR = ?", identificadores, null, null, null);
+
+        return cursor.moveToFirst();
+    }
 }

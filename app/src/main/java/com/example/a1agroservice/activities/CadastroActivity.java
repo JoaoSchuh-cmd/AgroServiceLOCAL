@@ -16,7 +16,7 @@ import com.example.a1agroservice.singleton.Login;
 
 public class CadastroActivity extends AppCompatActivity {
     private EditText edNome;
-    private EditText edWhatsapp;
+    private com.santalu.maskara.widget.MaskEditText edWhatsapp;
     private com.santalu.maskara.widget.MaskEditText edCpf;
     private EditText edUsuario;
     private EditText edSenha;
@@ -46,10 +46,10 @@ public class CadastroActivity extends AppCompatActivity {
 
         Pessoa pessoa = new Pessoa();
         pessoa.setNome(edNome.getText().toString());
-        pessoa.setCpf(edCpf.getText().toString());
-        pessoa.setUsuario(edUsuario.getText().toString());
+        pessoa.setCpf(edCpf.getUnMasked());
+        pessoa.setUsuario(edUsuario.getText().toString().trim());
         pessoa.setSenha(edSenha.getText().toString());
-        pessoa.setCelular(edWhatsapp.getText().toString());
+        pessoa.setCelular(edWhatsapp.getUnMasked());
 
         pessoaController.savePessoa(pessoa);
         limpaCampos();
@@ -85,7 +85,14 @@ public class CadastroActivity extends AppCompatActivity {
             edUsuario.setError("Usuário informado já foi cadastrado!");
             result = false;
         }
-        //TODO CPF e celular tb devem ser únicos
+        if (pessoaController.cpfAlreadyRegistered(edCpf.getUnMasked())) {
+            edCpf.setError("Cpf informado já foi cadastrado!");
+            result = false;
+        }
+        if (pessoaController.celularAlreadyRegistered(edWhatsapp.getUnMasked())) {
+            edCpf.setError("Celular informado já foi cadastrado!");
+            result = false;
+        }
 
         return result;
     }

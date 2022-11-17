@@ -45,4 +45,12 @@ public class PessoaController {
         return PessoaDao.getInstancia(context).delete(pessoa);
     }
 
+    public boolean cpfAlreadyRegistered(String cpf) {
+        return PessoaDao.getInstancia(context).getCpf(cpf);
+    }
+
+    public boolean celularAlreadyRegistered(String celular) {
+        return PessoaDao.getInstancia(context).getCelular(celular);
+    }
+
 }
