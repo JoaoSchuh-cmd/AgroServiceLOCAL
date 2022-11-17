@@ -170,4 +170,10 @@ public class AnuncioDao implements GenericDao<Anuncio> {
 
         return listaAnuncio;
     }
+
+    public ArrayList<Anuncio> getFiltered(ArrayList<String> filtros) {
+        ArrayList<Anuncio> lista= new ArrayList();
+
+        return lista;
+    }
 }

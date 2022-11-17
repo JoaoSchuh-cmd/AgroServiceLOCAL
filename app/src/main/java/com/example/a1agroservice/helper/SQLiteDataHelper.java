@@ -51,8 +51,8 @@ public class SQLiteDataHelper extends SQLiteOpenHelper {
                 "CREATE TABLE SERVICO (" +
                         "ID INTEGER PRIMARY KEY," +
                         "DESCRICAO VARCHAR(60)," +
-                        "DATA_INICIO DATE_TIME NOT NULL," +
-                        "DATA_FIM DATE_TIME NOT NULL," +
+                        "DATA_INICIO DATE NOT NULL," +
+                        "DATA_FIM DATE NOT NULL," +
                         "VALOR_HORA DOUBLE NOT NULL," +
                         "ID_TIPO_SERVICO INTEGER NOT NULL," +
                         "CONSTRAINT FK_ID_TIPO_SERVICO FOREIGN KEY (ID_TIPO_SERVICO)" +

@@ -10,6 +10,8 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,15 +24,29 @@ import com.example.a1agroservice.adapters.TipoServicoAdapter;
 import com.example.a1agroservice.controllers.TipoServicoController;
 import com.example.a1agroservice.models.TipoServico;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FiltrosFragment extends DialogFragment {
+    private Context context;
 
-    private Spinner spTipoServico;
-    private Button btAplicar;
     private TipoServicoController tipoServicoController;
     private ArrayList<TipoServico> tipoServicos;
-    private Context context;
+
+    private RadioButton rbFuncionario;
+    private RadioButton rbProprietario;
+    private RadioButton rbTodos;
+    private Spinner getSpTipoServico;
+    private EditText edValorHrMin;
+    private EditText edValorHrMax;
+    private com.santalu.maskara.widget.MaskEditText edDataInicial;
+    private com.santalu.maskara.widget.MaskEditText edDataFinal;
+    private EditText edCidade;
+    private EditText edEstado;
+
+    private Spinner spTipoServico;
+
+    private Button btAplicar;
 
     private long idTipoServicoSelected;
 
@@ -66,11 +82,22 @@ public class FiltrosFragment extends DialogFragment {
                 }
             });
 
+            rbFuncionario = view.findViewById(R.id.rbFuncionario);
+            rbProprietario = view.findViewById(R.id.rbProprietario);
+            rbTodos = view.findViewById(R.id.rbTodos);
+            edValorHrMin = view.findViewById(R.id.edValorHrMin);
+            edValorHrMax = view.findViewById(R.id.edValorHrMax);
+            edDataInicial = view.findViewById(R.id.edDataInicial);
+            edDataFinal = view.findViewById(R.id.edDataFinal);
+            edCidade = view.findViewById(R.id.edCidade);
+            edEstado = view.findViewById(R.id.edEstado);
+
             btAplicar = view.findViewById(R.id.btAplicar);
 
             btAplicar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //TODO Aplicar filtros
 
                 }
             });
@@ -81,5 +108,23 @@ public class FiltrosFragment extends DialogFragment {
         }
 
         return view;
+    }
+
+    public ArrayList<String> getFiltrosSelected() {
+        ArrayList<String> filtros = new ArrayList();
+
+        if (!rbTodos.isChecked()) {
+            if (rbFuncionario.isChecked())
+                filtros.add("F");
+            if (rbProprietario.isChecked())
+                filtros.add("P");
+        } else filtros.add("");
+        filtros.add(String.valueOf(idTipoServicoSelected));
+        filtros.add(edValorHrMin.getText().toString());
+        filtros.add(edValorHrMax.getText().toString());
+        filtros.add(edCidade.getText().toString());
+        filtros.add(edEstado.getText().toString());
+
+        return filtros;
     }
 }
