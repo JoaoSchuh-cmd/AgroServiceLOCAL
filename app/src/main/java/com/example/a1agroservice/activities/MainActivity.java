@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btEntrarOnClick(View view) {
+        Login.limpaUsuarioLogado();
         if (checkAllFields()) {
             Login.getUsuarioLogado(edUsuario.getText().toString().trim(), edSenha.getText().toString());
 

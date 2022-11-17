@@ -37,4 +37,8 @@ public class Login {
         this.senha = senha;
     }
 
+    public static void limpaUsuarioLogado() {
+        usuarioLogado = null;
+    }
+
 }
