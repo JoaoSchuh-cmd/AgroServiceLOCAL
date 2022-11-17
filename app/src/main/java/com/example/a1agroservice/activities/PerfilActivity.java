@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.a1agroservice.R;
@@ -24,6 +25,9 @@ public class PerfilActivity extends AppCompatActivity {
     private EditText edUsuario;
     private EditText edSenha;
 
+    private ImageButton btAnuncio;
+    private ImageButton btHome;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +39,28 @@ public class PerfilActivity extends AppCompatActivity {
         edUsuario = findViewById(R.id.edUsuario);
         edSenha = findViewById(R.id.edSenha);
 
+        btAnuncio = findViewById(R.id.btAnuncios);
+        btHome = findViewById(R.id.btHome);
+
         pessoaController = PessoaController.getInstance(this);
+
+        btAnuncio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent anunciosPage = new Intent(getApplicationContext(), AnunciosActivity.class);
+                startActivity(anunciosPage);
+                finish();
+            }
+        });
+
+        btHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
+                startActivity(homePage);
+                finish();
+            }
+        });
 
         carregaInformacoesUsuario();
     }
@@ -87,7 +112,7 @@ public class PerfilActivity extends AppCompatActivity {
 
             Intent loginPage = new Intent(this, MainActivity.class);
             startActivity(loginPage);
-            onDestroy();
+            finish();
         } catch (Exception E) {
             Toast.makeText(this, "Erro ao excluir usuário!", Toast.LENGTH_SHORT).show();
             Log.e("DeleteUser:", E.getMessage());

@@ -11,177 +11,173 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+        layout="@layout/layout_perfil_menu" />
 
-    <LinearLayout
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="18dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btRemoveConta"
-            style="@style/BoldHeadlines"
-            android:layout_width="175dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="169dp"
-            android:text="Remover conta"
-            android:textSize="15dp"
-            android:backgroundTint="@color/red"
-            android:onClick="btRemoverClick"/>
-
-        <TextView
-            style="@style/BoldHeadlines"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:layout_marginTop="2dp"
-            android:text="Nome:"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
-
-
-
-        <EditText
-            android:id="@+id/edNome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Digite aqui..."
-            android:textColorHint="@color/black"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/BoldHeadlines"
-            android:layout_marginTop="2dp"
-            android:text="WhatsApp:"
-            android:textSize="20dp"
-            android:textColor="@color/black"/>
-
-
-        <com.santalu.maskara.widget.MaskEditText
-            android:id="@+id/edWhatsapp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Digite aqui..."
-            android:inputType="number"
-            android:textColorHint="@color/black"
-            app:mask="+__ (__) _ ____-____"
-            app:maskCharacter="_"
-            app:maskStyle="completable"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/BoldHeadlines"
-            android:layout_marginTop="2dp"
-            android:text="CPF:"
-            android:textSize="20dp"
-            android:textColor="@color/black"/>
-
-        <com.santalu.maskara.widget.MaskEditText
-            android:id="@+id/edCpf"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Digite aqui..."
-            android:inputType="number"
-            android:textColorHint="@color/black"
-            app:mask="__.. - _"
-            app:maskCharacter=""
-            app:maskStyle="completable"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            style="@style/BoldHeadlines"
-            android:layout_marginTop="4dp"
-            android:text="Dados de Login"
-            android:textSize="25dp"
-            android:textColor="@color/green"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/BoldHeadlines"
-            android:layout_marginTop="2dp"
-            android:text="Usuário"
-            android:textSize="20dp"
-            android:textColor="@color/black"/>
-
-        <EditText
-            android:id="@+id/edUsuario"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:hint="Digite aqui..."
-            android:imeActionLabel="usuario"
-            android:textColorHint="@color/black" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/BoldHeadlines"
-            android:layout_marginTop="2dp"
-            android:text="Senha"
-            android:textSize="20dp"
-            android:textColor="@color/black"/>
-
-        <EditText
-            android:id="@+id/edSenha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Digite aqui..."
-            android:inputType="textPassword"
-            android:textColorHint="@color/black" />
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_marginTop="25dp"
-            android:layout_marginBottom="10dp">
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/BoldHeadlines"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="2dp"
+                android:text="Nome:"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+
+
+            <EditText
+                android:id="@+id/edNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Digite aqui..."
+                android:textColorHint="@color/black"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/BoldHeadlines"
+                android:layout_marginTop="2dp"
+                android:text="WhatsApp:"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
+
+
+            <com.santalu.maskara.widget.MaskEditText
+                android:id="@+id/edWhatsapp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Digite aqui..."
+                android:inputType="number"
+                android:textColorHint="@color/black"
+                app:mask="+__ (__) _ ____-____"
+                app:maskCharacter="_"
+                app:maskStyle="completable"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/BoldHeadlines"
+                android:layout_marginTop="2dp"
+                android:text="CPF:"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
+
+            <com.santalu.maskara.widget.MaskEditText
+                android:id="@+id/edCpf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Digite aqui..."
+                android:inputType="number"
+                android:textColorHint="@color/black"
+                app:mask="__.. - _"
+                app:maskCharacter=""
+                app:maskStyle="completable"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                style="@style/BoldHeadlines"
+                android:layout_marginTop="4dp"
+                android:text="Dados de Login"
+                android:textSize="25dp"
+                android:textColor="@color/green"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/BoldHeadlines"
+                android:layout_marginTop="2dp"
+                android:text="Usuário"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/edUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:hint="Digite aqui..."
+                android:imeActionLabel="usuario"
+                android:textColorHint="@color/black" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/BoldHeadlines"
+                android:layout_marginTop="2dp"
+                android:text="Senha"
+                android:textSize="20dp"
+                android:textColor="@color/black"/>
+
+            <EditText
+                android:id="@+id/edSenha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Digite aqui..."
+                android:inputType="textPassword"
+                android:textColorHint="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp">
+
+                <Button
+                    android:id="@+id/btSalvar"
+                    android:layout_width="160dp"
+                    style="@style/BoldHeadlines"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="15dp"
+                    android:textSize="15dp"
+                    android:text="Salvar"
+                    tools:layout_editor_absoluteX="54dp"
+                    tools:layout_editor_absoluteY="550dp"
+                    android:backgroundTint="@color/green"
+                    android:textColor="@color/black"
+                    android:onClick="btSalvarOnCick"/>
+
+                <Button
+                    android:id="@+id/btVoltar"
+                    android:textSize="15dp"
+                    style="@style/BoldHeadlines"
+                    android:layout_width="160dp"
+                    android:layout_height="60dp"
+                    android:backgroundTint="@color/white"
+                    android:text="Voltar"
+                    android:textColor="@color/black"
+                    android:onClick="btVoltarOnClick"/>
+
+            </LinearLayout>
 
             <Button
-                android:id="@+id/btSalvar"
-                android:layout_width="160dp"
+                android:id="@+id/btRemoveConta"
                 style="@style/BoldHeadlines"
+                android:layout_width="175dp"
                 android:layout_height="60dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginTop="5dp"
+                android:text="Remover conta"
                 android:textSize="15dp"
-                android:text="Salvar"
-                tools:layout_editor_absoluteX="54dp"
-                tools:layout_editor_absoluteY="550dp"
-                android:backgroundTint="@color/green"
-                android:textColor="@color/black"
-                android:onClick="btSalvarOnCick"/>
-
-            <Button
-                android:id="@+id/btVoltar"
-                android:textSize="15dp"
-                style="@style/BoldHeadlines"
-                android:layout_width="160dp"
-                android:layout_height="60dp"
-                android:backgroundTint="@color/white"
-                android:text="Voltar"
-                android:textColor="@color/black"
-                android:onClick="btVoltarOnClick"/>
+                android:backgroundTint="@color/red"
+                android:onClick="btRemoverClick"
+                android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </ScrollView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textStyle="italic"
-        android:layout_marginBottom="10dp"
-        android:text="₢ Seus dados serão protegidos de acordo com a LGPD"
-        android:textSize="15dp"
-        android:textColor="@color/black"/>
-    </LinearLayout>
+</LinearLayout>
