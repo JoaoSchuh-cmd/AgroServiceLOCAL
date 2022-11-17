@@ -60,18 +60,29 @@ public class AnunciosActivity extends AppCompatActivity {
         btHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
-                startActivity(homePage);
-                finish();
+                try {
+                    Intent homePage = new Intent(getApplicationContext(), HomeActivity.class);
+                    startActivity(homePage);
+                    finish();
+                } catch (Exception E) {
+                    Toast.makeText(getApplicationContext(), "Erro ao abrir HomePage!", Toast.LENGTH_SHORT).show();
+                    Log.e("btHomeOnClick", E.getMessage());
+                }
+
             }
         });
 
         btPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent perfilPage = new Intent(getApplicationContext(), PerfilActivity.class);
-                startActivity(perfilPage);
-                finish();
+                try {
+                    Intent perfilPage = new Intent(getApplicationContext(), PerfilActivity.class);
+                    startActivity(perfilPage);
+                    finish();
+                } catch (Exception E) {
+                    Toast.makeText(getApplicationContext(), "Erro ao abrir PerfilPage!", Toast.LENGTH_SHORT).show();
+                    Log.e("btPerfilOnClick", E.getMessage());
+                }
             }
         });
 

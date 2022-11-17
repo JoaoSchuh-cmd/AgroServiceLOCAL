@@ -53,6 +53,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         pessoaController.savePessoa(pessoa);
         limpaCampos();
+        Login.getUsuarioLogado(pessoa.getUsuario(), pessoa.getSenha());
         abrirHomePage();
         Toast.makeText(this, "Bem-vindo " + pessoa.getNome(), Toast.LENGTH_SHORT).show();
         finish();

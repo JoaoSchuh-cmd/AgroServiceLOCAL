@@ -39,16 +39,26 @@ public class MenuPerfilFragment extends DialogFragment {
             tvSeuPerfil.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent perfilPage = new Intent(context, PerfilActivity.class);
-                    startActivity(perfilPage);
+                    try {
+                        Intent perfilPage = new Intent(context, PerfilActivity.class);
+                        startActivity(perfilPage);
+                    } catch (Exception E) {
+                        Toast.makeText(context, "Erro ao abrir aba de Perfil!", Toast.LENGTH_SHORT).show();
+                        Log.e("PerfilOnClick", E.getMessage());
+                    }
                 }
             });
 
             tvSeusAnuncios.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent anunciosPerfil = new Intent(context, AnunciosActivity.class);
-                    startActivity(anunciosPerfil);
+                    try {
+                        Intent anunciosPerfil = new Intent(context, AnunciosActivity.class);
+                        startActivity(anunciosPerfil);
+                    } catch (Exception E) {
+                        Toast.makeText(context, "Erro ao abrir aba de Seus Anúncios!", Toast.LENGTH_SHORT).show();
+                        Log.e("SeusAnunciosOnClick", E.getMessage());
+                    }
                 }
             });
         } catch (Exception E) {
