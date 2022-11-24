@@ -106,6 +106,7 @@
                 android:hint="Digite aqui..."
                 android:imeActionLabel="usuario"
                 android:textColorHint="@color/black"
+                android:inputType="number"
                 app:mask="___.___.___-__"
                 app:maskCharacter=""
                 app:maskStyle="persistent"/>
