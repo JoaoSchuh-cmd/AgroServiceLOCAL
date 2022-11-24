@@ -62,6 +62,7 @@ public class AnuncioAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.anuncios_list_item, parent, false);
 
         TextView tvTipoService = convertView.findViewById(R.id.tvTipoServico);
+        TextView tvTipoPessoa = convertView.findViewById(R.id.tvTipoPessoa);
         TextView tvValorHora = convertView.findViewById(R.id.tvValorHora);
         TextView tvDataInicial = convertView.findViewById(R.id.tvDataInicial);
         TextView tvDataFinal = convertView.findViewById(R.id.tvDataFinal);
@@ -76,7 +77,7 @@ public class AnuncioAdapter extends BaseAdapter {
                                 ServicoController.getInstance(context)
                                         .getServicoById(anuncio.getId_servico()) .getId_tipo_servico()).getNome()
         );
-
+        tvTipoPessoa.setText(setTipoPessoa(anuncio));
         tvValorHora.setText(String.valueOf(ServicoController.getInstance(context).getServicoById(anuncio.getId_servico()).getValorhora()));
         tvDataInicial.setText(ServicoController.getInstance(context).getServicoById(anuncio.getId_servico()).getData_inicio());
         tvDataFinal.setText(ServicoController.getInstance(context).getServicoById(anuncio.getId_servico()).getData_fim());
@@ -100,6 +101,14 @@ public class AnuncioAdapter extends BaseAdapter {
         });
 
         return convertView;
+    }
+
+    private String setTipoPessoa(Anuncio anuncio)  {
+        if (anuncio.getTipoPessoa().equals("F"))
+            return "Funcionário";
+        if (anuncio.getTipoPessoa().equals("P"))
+            return "Proprietário";
+        return null;
     }
 
 }
