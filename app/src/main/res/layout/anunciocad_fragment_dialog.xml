@@ -46,7 +46,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Proprietario"
+                        android:text="Contratante"
                         android:textColor="@color/white"
                         android:textSize="20dp"
                         android:textStyle="bold"
